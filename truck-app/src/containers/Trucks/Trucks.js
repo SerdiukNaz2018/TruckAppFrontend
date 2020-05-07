@@ -58,7 +58,7 @@ class Trucks extends Component {
 
     sortHandler = event => {
         axios
-            .get(`http://api/truck/sortBy= {${event.target.value}}`)
+            .get(`http://localhost:8088/api/truck?SortBy=${event.target.value}`)
             .then(response => {
                 this.setState({ truckList: response.data });
             })
