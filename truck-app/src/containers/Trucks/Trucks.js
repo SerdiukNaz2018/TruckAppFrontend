@@ -101,7 +101,7 @@ class Trucks extends Component {
                         truckId={truck.id}
                         brand={truck.brand}
                         model={truck.model}
-                        price={truck.price}
+                        price={truck.priceUSD}
                         years={truck.amountYear}
                         country={truck.country}
                         licensePlate={truck.registrationPlate}
