@@ -1,0 +1,29 @@
+.Trucks {
+    text-align: center;
+}
+
+.Trucks input {
+    padding: 5px;
+    width: 50%;
+    height: 40px;
+    border-radius: 10px 0 0 10px;
+}
+
+.Trucks button {
+    height: 40px;
+    border-radius: 0 10px 10px 0;
+    color: white;
+    background-color: rgb(61, 83, 83);
+    outline: none;
+    box-shadow: none;
+
+    outline: 0;
+   -webkit-box-shadow: none;
+   box-shadow: none;
+}
+
+@media(max-width: 500px) {
+    .Trucks input {
+        width: 70%;
+    }
+}

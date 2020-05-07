@@ -1,0 +1,33 @@
+.App {
+    
+}
+
+.Container input {
+    margin: 5px auto;
+    border-radius: 5px;
+    display: block;
+    padding: 2px;
+}
+
+.Container button {
+    border-radius: 5px;
+    width: 100px;
+    margin: 20px auto;
+    display: block;
+}
+
+.Book {
+    border: 1px solid lightgrey; 
+    padding: 5px;
+    width: 80%;
+    margin: 5px auto;
+}
+
+.Container {
+    box-shadow: 1px 1px 1px 2px lightgrey;
+    margin: 10px auto;
+    padding: 20px 10px;
+    width: 400px;
+    text-align: center;
+    border: 1px solid lightgrey;
+}

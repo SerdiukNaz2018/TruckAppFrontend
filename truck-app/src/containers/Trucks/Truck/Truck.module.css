@@ -1,0 +1,42 @@
+.Truck {
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 2px 1px 1px #ccc;
+    width: 60%;
+    height: 20%px;
+    font-size: large;
+    text-align: left;
+    border-radius: 20px;
+}
+
+.Truck img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px 0px 0px 20px;
+}
+
+.Truck .Col {
+    height: 100%;
+}
+
+.Truck select {
+    border-radius: 10px;
+    margin: 5px;
+}
+
+@media( max-width: 766px) {
+    .Truck {
+        width: 80%
+    }
+
+    .Truck img {
+        border-radius: 20px;
+    }
+}
+
+@media (max-width: 800px) {
+    .Truck {
+        width: 80%;
+    }
+}
