@@ -61,6 +61,7 @@ class Trucks extends Component {
             .get(`http://localhost:8088/api/truck?SortBy=${event.target.value}`)
             .then(response => {
                 this.setState({ truckList: response.data });
+                console.log(response.data);
             })
             .catch(error => {
                 console.log(error);
