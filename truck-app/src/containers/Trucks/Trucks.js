@@ -139,11 +139,11 @@ class Trucks extends Component {
                         style={{ borderRadius: "10px", margin: "10px" }}
                         onChange={this.sortHandler}
                     >
-                        <option value="price">Price</option>
-                        <option value="amountYear">Years</option>
-                        <option value="brand">Brand</option>
-                        <option value="model">Model</option>
-                        <option value="country">Country</option>
+                        <option value="Price">Price</option>
+                        <option value="AmountYear">Years</option>
+                        <option value="Brand">Brand</option>
+                        <option value="Model">Model</option>
+                        <option value="Country">Country</option>
                     </select>
                     <button
                         style={{
