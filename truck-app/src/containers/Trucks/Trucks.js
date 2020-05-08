@@ -3,6 +3,7 @@ import axios from "axios";
 import Truck from "./Truck/Truck";
 import classes from "./Trucks.module.css";
 import NewTruck from "./Truck/NewTruck/NewTruck";
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Trucks extends Component {
     state = {
@@ -43,6 +44,7 @@ class Trucks extends Component {
     setupTruckList = () => {
         axios
             .get("http://localhost:8088/api/truck")
+            //.get('https://course-project-react.firebaseio.com/trucks.json')
             .then(response => {
                 this.setState({ truckList: response.data, loading: false });
             })
@@ -57,24 +59,30 @@ class Trucks extends Component {
     }
 
     sortHandler = event => {
+        this.setState({loading: true});
         axios
             .get(`http://localhost:8088/api/truck?SortBy=${event.target.value}`)
             .then(response => {
+                this.setState({loading: false});
                 this.setState({ truckList: response.data });
                 console.log(response.data);
             })
             .catch(error => {
+                this.setState({loading: false});
                 console.log(error);
             });
     };
 
     searchButtonHandler = () => {
+        this.setState({loading: true});
         axios
             .get(`http://localhost:8088/api/truck?SearchQuery=${this.state.searchRequest}`)
             .then(response => {
+                this.setState({loading: false});
                 this.setState({ truckList: response.data });
             })
             .catch(error => {
+                this.setState({loading: false});
                 console.log(error);
             });
     };
@@ -169,7 +177,7 @@ class Trucks extends Component {
                         New Truck
                     </button>
                 </div>
-                {this.state.loading ? <p>Loading...</p> : trucks}
+                {this.state.loading ? <Spinner /> : trucks}
             </div>
         );
     }

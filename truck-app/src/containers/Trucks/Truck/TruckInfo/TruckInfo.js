@@ -2,19 +2,23 @@ import React, { Component } from "react";
 import classes from "./TruckInfo.module.css";
 import Backdrop from "../../../../components/UI/Backdrop/Backdrop";
 import axios from "axios";
+import Spinner from '../../../../components/UI/Spinner/Spinner';
 
 class TruckInfo extends Component {
     state = {
-        priceUSD: this.props.price,
-        country: this.props.country,
-        registrationPlate: this.props.licensePlate,
-        amountYear: this.props.years,
-        brand: this.props.brand,
-        model: this.props.model,
+        truckInformation: {
+            priceUSD: this.props.price,
+            country: this.props.country,
+            registrationPlate: this.props.licensePlate,
+            yearGraduation: this.props.years,
+            brand: this.props.brand,
+            model: this.props.model
+        },
+        loading: false
     };
 
-    shouldComponentUpdate(nextProps) {
-        return nextProps.visible !== this.props.visible;
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.visible !== this.props.visible || this.state.loading !== nextState.loading;
     }
 
     componentDidMount() { //dont forget to uncomment the code below!!!
@@ -25,27 +29,41 @@ class TruckInfo extends Component {
         //     })
     }
 
+    setValue = (event, key) => {
+        const newState = {...this.state};
+        newState.truckInformation[key] = event.target.value;
+        this.setState(newState);
+    }
+
     updateTruck = () => {
-        console.log(this.state);
+        this.setState({loading: true});
         axios
-            .put(`http://localhost:8088/api/truck/${this.props.truckId}`, this.state)
+            .put(`http://localhost:8088/api/truck/${this.props.truckId}`, this.state.truckInformation)
             .then(response => {
-                console.log(response);
+                this.setState({loading: false});
+                this.props.enableRegularMode();
                 this.props.resetTruckList();
             })
             .catch(error => {
+                this.setState({loading: false});
+                this.props.enableRegularMode();
                 console.log(error);
             });
     };
 
     deleteTruck = () => {
+        this.setState({loading: true})
         axios
             .delete(`http://localhost:8088/api/truck/${this.props.truckId}`)
             .then(response => {
+                this.setState({loading: false});
+                this.props.enableRegularMode();
                 console.log(response);
                 this.props.resetTruckList();
             })
             .catch(error => {
+                this.setState({loading: false});
+                this.props.enableRegularMode();
                 console.log(error);
             });
     }
@@ -65,32 +83,34 @@ class TruckInfo extends Component {
                     <h3>
                         {this.props.brand}
                     </h3>
-                    <ul>
-                        <li>
-                        Model:{" "}
-                            <input
-                                onChange = {event => {this.setState({model: event.target.value})}}
-                                type="text"
-                                defaultValue={this.props.model}
-                            />
-                        </li>
-                        <li>
-                            Price ($):{" "}
-                            <input
-                                onChange = {event => {this.setState({priceUSD: +event.target.value})}}
-                                type="text"
-                                defaultValue={this.props.price}
-                            />
-                        </li>
-                        <li>
-                            Year:{" "}
-                            <input
-                                onChange = {event => {this.setState({amountYear: +event.target.value})}}
-                                type="text"
-                                defaultValue={this.props.years}
-                            />
-                        </li>
-                    </ul>
+                    {!this.state.loading ? 
+                        <ul>
+                            <li>
+                            Model:{" "}
+                                <input
+                                    onChange = {event => this.setValue(event, 'model')}
+                                    type="text"
+                                    defaultValue={this.props.model}
+                                />
+                            </li>
+                            <li>
+                                Price ($):{" "}
+                                <input
+                                    onChange = {event => this.setValue(event, 'priceUSD')}
+                                    type="text"
+                                    defaultValue={this.props.price}
+                                />
+                            </li>
+                            <li>
+                                Year:{" "}
+                                <input
+                                    onChange = {event => this.setValue(event, 'yearGraduation')}
+                                    type="text"
+                                    defaultValue={this.props.years} //get the year!!!
+                                />
+                            </li>
+                        </ul> 
+                    : <Spinner />}
                     <div style={{textAlign: 'center'}}>
                         <button
                             style={{ borderRadius: "10px" }}

@@ -2,35 +2,46 @@ import React, { Component } from "react";
 import classes from "./NewTruck.module.css";
 import Backdrop from "../../../../components/UI/Backdrop/Backdrop";
 import axios from "axios";
+import Spinner from '../../../../components/UI/Spinner/Spinner';
 
 class TruckInfo extends Component {
     state = {
-        priceUSD: null,
-        country: null,
-        registrationPlate: null,
-        yearGraduation: null,
-        brand: null,
-        model: null,
-        imagePath: null,
+        truckInformation: {
+            priceUSD: null,
+            country: null,
+            registrationPlate: null,
+            yearGraduation: null,
+            brand: null,
+            model: null
+        },
+        loading: false
     };
 
-    shouldComponentUpdate(nextProps) {
-        return nextProps.visible !== this.props.visible;
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.visible !== this.props.visible || nextState.loading !== this.state.loading;
     }
 
     addTruck = () => {
-        console.log(this.state);
-        console.log(this.state);
+        this.setState({loading: true});
         axios
-            .post("http://localhost:8088/api/truck", this.state)
+            .post("http://localhost:8088/api/truck", this.state.truckInformation)
             .then(response => {
-                console.log(response);
+                this.setState({loading: false});
+                this.props.enableRegularMode();
                 this.props.resetTruckList();
             })
             .catch(error => {
+                this.setState({loading: false});
+                this.props.enableRegularMode();
                 console.log(error);
             });
     };
+
+    setValue = (event, key) => {
+        const newState = {...this.state};
+        newState.truckInformation[key] = event.target.value;
+        this.setState(newState);
+    }
 
     render() {
         return (
@@ -44,12 +55,10 @@ class TruckInfo extends Component {
                             : "translateY(-100vh)",
                     }}
                 >
-                    <ul>
+                    {!this.state.loading ? <ul>
                         <li>
                             Brand:{" "}
-                            <select name="brand" id="brand" onChange = {event => {
-                                this.setState({brand: event.target.value})
-                            }}>
+                            <select name="brand" id="brand" onChange = {event => this.setValue(event, 'brand')}>
                                 <option value="MAN_SE">MAN</option>
                                 <option value="Renault">Renault</option>
                                 <option value="TATA">TATA</option>
@@ -60,59 +69,46 @@ class TruckInfo extends Component {
                         <li>
                             Model:{" "}
                             <input
-                                onChange={event => {
-                                    this.setState({
-                                        model: event.target.value,
-                                    });
-                                }}
+                                onChange={event => this.setValue(event, 'model')}
+                                type="text"
+                            />
+                        </li>
+                        <li>
+                            Country:{" "}
+                            <input
+                                onChange={event => this.setValue(event, 'country')}
                                 type="text"
                             />
                         </li>
                         <li>
                             Price ($):{" "}
                             <input
-                                onChange={event => {
-                                    this.setState({
-                                        priceUSD: +event.target.value,
-                                    });
-                                }}
+                                onChange={event => this.setValue(event, 'priceUSD')}
                                 type="text"
                             />
                         </li>
                         <li>
                             License Plate:{" "}
                             <input
-                                onChange={event => {
-                                    this.setState({
-                                        registrationPlate: event.target.value,
-                                    });
-                                }}
+                                onChange={event => this.setValue(event, 'registrarionPlate')}
                                 type="text"
                             />
                         </li>
                         <li>
                             Year:{" "}
                             <input
-                                onChange={event => {
-                                    this.setState({
-                                        yearGraduation: +event.target.value,
-                                    });
-                                }}
+                                onChange={event => this.setValue(event, 'yearGraduation')}
                                 type="text"
                             />
                         </li>
                         <li>
                             Image address:{" "}
                             <input
-                                onChange={event => {
-                                    this.setState({
-                                        imagePath: event.target.value,
-                                    });
-                                }}
+                                onChange={event => this.setValue(event, 'imagePath')}
                                 type="text"
                             />
                         </li>
-                    </ul>
+                    </ul> : <Spinner />}
                     <div style={{ textAlign: "center" }}>
                         <button
                             style={{ borderRadius: "10px" }}
