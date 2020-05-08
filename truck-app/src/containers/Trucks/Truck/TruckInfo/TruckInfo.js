@@ -28,7 +28,7 @@ class TruckInfo extends Component {
     updateTruck = () => {
         console.log(this.state);
         axios
-            .put(".../this.props.truckId", this.state)
+            .put(`http://localhost:8088/api/truck/${this.props.truckId}`, this.state)
             .then(response => {
                 console.log(response);
                 this.props.resetTruckList();

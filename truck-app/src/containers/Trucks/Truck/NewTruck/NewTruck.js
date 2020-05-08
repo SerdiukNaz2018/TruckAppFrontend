@@ -91,7 +91,7 @@ class TruckInfo extends Component {
                             />
                         </li>
                         <li>
-                            Age (years):{" "}
+                            Year:{" "}
                             <input
                                 onChange={event => {
                                     this.setState({
