@@ -42,7 +42,7 @@ class Trucks extends Component {
 
     setupTruckList = () => {
         axios
-            .get("https://course-project-react.firebaseio.com/trucks.json")
+            .get("http://localhost:8088/api/truck")
             .then(response => {
                 this.setState({ truckList: response.data, loading: false });
             })
