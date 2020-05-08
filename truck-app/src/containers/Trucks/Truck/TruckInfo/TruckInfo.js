@@ -119,7 +119,7 @@ class TruckInfo extends Component {
                                 backgroundColor: "red",
                                 width: "151px",
                             }}
-                            onClick={() => {}}
+                            onClick={this.deleteTruck}
                         >
                             Delete Truck
                         </button>
