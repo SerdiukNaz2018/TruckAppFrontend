@@ -5,10 +5,10 @@ import axios from "axios";
 
 class TruckInfo extends Component {
     state = {
-        price: null,
+        priceUSD: null,
         country: null,
         registrationPlate: null,
-        amountYear: null,
+        yearGraduation: null,
         brand: null,
         model: null,
         imagePath: null,
@@ -22,7 +22,7 @@ class TruckInfo extends Component {
         console.log(this.state);
         console.log(this.state);
         axios
-            .post(".../this.props.truckList", this.state)
+            .post("http://localhost:8088/api/truck", this.state)
             .then(response => {
                 console.log(response);
                 this.props.resetTruckList();
@@ -73,7 +73,7 @@ class TruckInfo extends Component {
                             <input
                                 onChange={event => {
                                     this.setState({
-                                        price: +event.target.value,
+                                        priceUSD: +event.target.value,
                                     });
                                 }}
                                 type="text"
@@ -95,7 +95,7 @@ class TruckInfo extends Component {
                             <input
                                 onChange={event => {
                                     this.setState({
-                                        amountYear: +event.target.value,
+                                        yearGraduation: +event.target.value,
                                     });
                                 }}
                                 type="text"
