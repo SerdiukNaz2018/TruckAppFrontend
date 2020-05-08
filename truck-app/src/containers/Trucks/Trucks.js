@@ -70,7 +70,7 @@ class Trucks extends Component {
 
     searchButtonHandler = () => {
         axios
-            .post("", this.state.searchRequest)
+            .get(`http://localhost:8088/api/truck?SearchQuery=${this.state.searchRequest}`)
             .then(response => {
                 this.setState({ truckList: response.data });
             })
