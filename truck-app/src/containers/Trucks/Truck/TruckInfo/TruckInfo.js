@@ -5,7 +5,7 @@ import axios from "axios";
 
 class TruckInfo extends Component {
     state = {
-        price: this.props.price,
+        priceUSD: this.props.price,
         country: this.props.country,
         registrationPlate: this.props.licensePlate,
         amountYear: this.props.years,
@@ -39,12 +39,11 @@ class TruckInfo extends Component {
     };
 
     deleteTruck = () => {
-        console.log(`delete reuest on http://localhost:8088/api/truck/${this.props.truckId}`)
         axios
             .delete(`http://localhost:8088/api/truck/${this.props.truckId}`)
             .then(response => {
                 console.log(response);
-                //this.props.resetTruckList();
+                this.props.resetTruckList();
             })
             .catch(error => {
                 console.log(error);
@@ -64,35 +63,27 @@ class TruckInfo extends Component {
                     }}
                 >
                     <h3>
-                        {this.props.brand} {this.props.model}
+                        {this.props.brand}
                     </h3>
                     <ul>
                         <li>
+                        Model:{" "}
+                            <input
+                                onChange = {event => {this.setState({model: event.target.value})}}
+                                type="text"
+                                defaultValue={this.props.model}
+                            />
+                        </li>
+                        <li>
                             Price ($):{" "}
                             <input
-                                onChange = {event => {this.setState({price: +event.target.value})}}
+                                onChange = {event => {this.setState({priceUSD: +event.target.value})}}
                                 type="text"
                                 defaultValue={this.props.price}
                             />
                         </li>
                         <li>
-                            License Plate:{" "}
-                            <input
-                                onChange = {event => {this.setState({registrationPlate: event.target.value})}}
-                                type="text"
-                                defaultValue={this.props.licensePlate}
-                            />
-                        </li>
-                        <li>
-                            Country:{" "}
-                            <input
-                                onChange = {event => {this.setState({country: event.target.value})}}
-                                type="text"
-                                defaultValue={this.props.country}
-                            />
-                        </li>
-                        <li>
-                            Age (years):{" "}
+                            Year:{" "}
                             <input
                                 onChange = {event => {this.setState({amountYear: +event.target.value})}}
                                 type="text"
