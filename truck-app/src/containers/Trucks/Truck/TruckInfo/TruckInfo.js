@@ -40,7 +40,7 @@ class TruckInfo extends Component {
 
     deleteTruck = () => {
         axios
-            .delete('../../this.props.truckId')
+            .delete(`http://localhost:8088/api/truck/${this.props.truckId}`)
             .then(response => {
                 console.log(response);
                 this.props.resetTruckList();
