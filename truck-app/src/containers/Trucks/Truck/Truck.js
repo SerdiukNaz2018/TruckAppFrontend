@@ -70,7 +70,7 @@ class Truck extends Component {
                             </li>
                             <li>
                                 Year: <strong>{this.props.yearGraduation} </strong>
-                                ({this.props.years} years)
+                                {this.props.years !== 0 ? this.props.years === 1 ? <span>({this.props.years} year)</span> :<span>({this.props.years} years)</span> : <span>(new)</span>}
                             </li>
                         </ul>
                         {this.props.admin ? (
