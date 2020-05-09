@@ -6,8 +6,12 @@ import TruckInfo from "./TruckInfo/TruckInfo";
 
 class Truck extends Component {
     state = {
-        currency: "USD",
-        price: this.props.price,
+        price: this.props.priceUSD,
+        currencyList: {
+            USD: this.props.priceUSD,
+            EUR: this.props.priceEUR,
+            UAH: this.props.priceUAH,
+        },
         editing: false,
     };
 
@@ -28,18 +32,7 @@ class Truck extends Component {
     };
 
     changeCurrency = event => {
-        axios
-            .post("", {
-                from: this.state.currency,
-                to: event.target.value,
-                value: this.props.price,
-            })
-            .then(response => {
-                this.setState({
-                    price: response.data,
-                    currency: event.target.value,
-                });
-            });
+        this.setState({price: this.state.currencyList[event.target.value]});
     };
 
     render() {
@@ -57,7 +50,7 @@ class Truck extends Component {
                             <li>
                                 Price:{" "}
                                 <strong>
-                                    {this.formatPriceString(this.props.price)}
+                                    {this.formatPriceString(this.state.price)}
                                 </strong>
                                 <select
                                     id="currency"

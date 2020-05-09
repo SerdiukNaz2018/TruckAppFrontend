@@ -44,7 +44,6 @@ class Trucks extends Component {
     setupTruckList = () => {
         axios
             .get("http://localhost:8088/api/truck")
-            //.get('https://course-project-react.firebaseio.com/trucks.json')
             .then(response => {
                 this.setState({ truckList: response.data, loading: false });
             })
@@ -110,7 +109,9 @@ class Trucks extends Component {
                         truckId={truck.id}
                         brand={truck.brand}
                         model={truck.model}
-                        price={truck.priceUSD}
+                        priceUSD={truck.priceUSD}
+                        priceEUR={truck.priceEUR}
+                        priceUAH={truck.priceUAH}
                         years={truck.amountYear}
                         country={truck.country}
                         licensePlate={truck.registrationPlate}
@@ -126,6 +127,7 @@ class Trucks extends Component {
                 <NewTruck
                     visible={this.state.adding}
                     enableRegularMode={this.disableAddingMode}
+                    resetTruckList = {this.setupTruckList}
                 />
                 <input
                     type="search"
@@ -178,7 +180,7 @@ class Trucks extends Component {
                         New Truck
                     </button>
                 </div>
-                {this.state.loading ? <Spinner /> : trucks}
+                {this.state.loading ? <Spinner /> : (trucks.length === 0 ? <p>No trucks found found...</p>: trucks)}
             </div>
         );
     }

@@ -23,7 +23,17 @@ class TruckInfo extends Component {
         );
     }
 
+    convertPriceYearToFloat = () => {
+        const newState = {...this.state};
+        newState.truckInformation.priceUSD = +this.state.truckInformation.priceUSD;
+        newState.truckInformation.yearGraduation = +this.state.truckInformation.yearGraduation;
+        this.setState(newState);
+    }
+
     addTruck = () => {
+        this.convertPriceYearToFloat();
+        
+        console.log(this.state.truckInformation);
         this.setState({ loading: true });
         axios
             .post(
