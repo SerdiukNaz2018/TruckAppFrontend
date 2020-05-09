@@ -147,10 +147,11 @@ class Trucks extends Component {
                         id="sort"
                         style={{ borderRadius: "10px", margin: "10px" }}
                         onChange={this.sortHandler}
+                        defaultValue="Brand"
                     >
                         <option value="PriceUSD">Price</option>
                         <option value="AmountYear">Years</option>
-                        <option value="Brand" selected>Brand</option>
+                        <option value="Brand">Brand</option>
                         <option value="Model">Model</option>
                         <option value="Country">Country</option>
                     </select>

@@ -2,46 +2,51 @@ import React, { Component } from "react";
 import classes from "./NewTruck.module.css";
 import Backdrop from "../../../../components/UI/Backdrop/Backdrop";
 import axios from "axios";
-import Spinner from '../../../../components/UI/Spinner/Spinner';
+import Spinner from "../../../../components/UI/Spinner/Spinner";
 
 class TruckInfo extends Component {
     state = {
         truckInformation: {
             priceUSD: null,
-            country: null,
             registrationPlate: null,
             yearGraduation: null,
-            brand: null,
-            model: null
+            brand: 'MAN_SE',
+            model: null,
         },
-        loading: false
+        loading: false,
     };
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.visible !== this.props.visible || nextState.loading !== this.state.loading;
+        return (
+            nextProps.visible !== this.props.visible ||
+            nextState.loading !== this.state.loading
+        );
     }
 
     addTruck = () => {
-        this.setState({loading: true});
+        this.setState({ loading: true });
         axios
-            .post("http://localhost:8088/api/truck", this.state.truckInformation)
+            .post(
+                "http://localhost:8088/api/truck",
+                this.state.truckInformation
+            )
             .then(response => {
-                this.setState({loading: false});
+                this.setState({ loading: false });
                 this.props.enableRegularMode();
                 this.props.resetTruckList();
             })
             .catch(error => {
-                this.setState({loading: false});
+                this.setState({ loading: false });
                 this.props.enableRegularMode();
                 console.log(error);
             });
     };
 
     setValue = (event, key) => {
-        const newState = {...this.state};
+        const newState = { ...this.state };
         newState.truckInformation[key] = event.target.value;
         this.setState(newState);
-    }
+    };
 
     render() {
         return (
@@ -55,60 +60,79 @@ class TruckInfo extends Component {
                             : "translateY(-100vh)",
                     }}
                 >
-                    {!this.state.loading ? <ul>
-                        <li>
-                            Brand:{" "}
-                            <select name="brand" id="brand" onChange = {event => this.setValue(event, 'brand')}>
-                                <option value="MAN_SE">MAN</option>
-                                <option value="Renault">Renault</option>
-                                <option value="TATA">TATA</option>
-                                <option value="Volkswagen">Volkswagen</option>
-                                <option value="BELAZ">BELAZ</option>
-                            </select>
-                        </li>
-                        <li>
-                            Model:{" "}
-                            <input
-                                onChange={event => this.setValue(event, 'model')}
-                                type="text"
-                            />
-                        </li>
-                        <li>
-                            Country:{" "}
-                            <input
-                                onChange={event => this.setValue(event, 'country')}
-                                type="text"
-                            />
-                        </li>
-                        <li>
-                            Price ($):{" "}
-                            <input
-                                onChange={event => this.setValue(event, 'priceUSD')}
-                                type="text"
-                            />
-                        </li>
-                        <li>
-                            License Plate:{" "}
-                            <input
-                                onChange={event => this.setValue(event, 'registrarionPlate')}
-                                type="text"
-                            />
-                        </li>
-                        <li>
-                            Year:{" "}
-                            <input
-                                onChange={event => this.setValue(event, 'yearGraduation')}
-                                type="text"
-                            />
-                        </li>
-                        <li>
-                            Image address:{" "}
-                            <input
-                                onChange={event => this.setValue(event, 'imagePath')}
-                                type="text"
-                            />
-                        </li>
-                    </ul> : <Spinner />}
+                    {!this.state.loading ? (
+                        <ul>
+                            <li>
+                                Brand:{" "}
+                                <select
+                                    name="brand"
+                                    id="brand"
+                                    defaultValue="MAN_SE"
+                                    onChange={event =>
+                                        this.setValue(event, "brand")
+                                    }
+                                >
+                                    <option value="MAN_SE">MAN</option>
+                                    <option value="Renault">Renault</option>
+                                    <option value="TATA">TATA</option>
+                                    <option value="Volkswagen">
+                                        Volkswagen
+                                    </option>
+                                    <option value="BELAZ">BELAZ</option>
+                                </select>
+                            </li>
+                            <li>
+                                Model:{" "}
+                                <input
+                                    onChange={event =>
+                                        this.setValue(event, "model")
+                                    }
+                                    type="text"
+                                />
+                            </li>
+                            <li>
+                                Price ($):{" "}
+                                <input
+                                    onChange={event =>
+                                        this.setValue(event, "priceUSD")
+                                    }
+                                    type="text"
+                                />
+                            </li>
+                            <li>
+                                License Plate:{" "}
+                                <input
+                                    onChange={event =>
+                                        this.setValue(
+                                            event,
+                                            "registrationPlate"
+                                        )
+                                    }
+                                    type="text"
+                                />
+                            </li>
+                            <li>
+                                Year:{" "}
+                                <input
+                                    onChange={event =>
+                                        this.setValue(event, "yearGraduation")
+                                    }
+                                    type="text"
+                                />
+                            </li>
+                            <li>
+                                Image address:{" "}
+                                <input
+                                    onChange={event =>
+                                        this.setValue(event, "imagePath")
+                                    }
+                                    type="text"
+                                />
+                            </li>
+                        </ul>
+                    ) : (
+                        <Spinner />
+                    )}
                     <div style={{ textAlign: "center" }}>
                         <button
                             style={{ borderRadius: "10px" }}
