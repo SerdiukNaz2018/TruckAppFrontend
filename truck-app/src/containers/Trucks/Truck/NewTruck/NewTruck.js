@@ -10,7 +10,8 @@ class TruckInfo extends Component {
             priceUSD: null,
             registrationPlate: null,
             yearGraduation: null,
-            brand: 'MAN_SE',
+            brandSearch: 'MAN_SE',
+            brand: 'MAN',
             model: null,
         },
         loading: false,
@@ -32,7 +33,7 @@ class TruckInfo extends Component {
 
     addTruck = () => {
         this.convertPriceYearToFloat();
-        
+        console.log(this.truckInformation);
         console.log(this.state.truckInformation);
         this.setState({ loading: true });
         axios
@@ -58,6 +59,13 @@ class TruckInfo extends Component {
         this.setState(newState);
     };
 
+    setBrand = event => {
+        const newState = {...this.state};
+        newState.truckInformation.brandSearch = event.target.value.name1;
+        newState.truckInformation.brand = event.target.value.name2;
+        this.setState(newState);
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -78,17 +86,24 @@ class TruckInfo extends Component {
                                     name="brand"
                                     id="brand"
                                     defaultValue="MAN_SE"
-                                    onChange={event =>
-                                        this.setValue(event, "brand")
-                                    }
+                                    onChange={event => this.setBrand(event)}
                                 >
-                                    <option value="MAN_SE">MAN</option>
-                                    <option value="Renault">Renault</option>
-                                    <option value="TATA">TATA</option>
-                                    <option value="Volkswagen">
-                                        Volkswagen
-                                    </option>
-                                    <option value="BELAZ">BELAZ</option>
+                                    <option value={{name1: "MAN_SE", name2: "MAN"}}>MAN</option>
+                                    <option value={{name1:"Renault", name2: "RENAULT"}}>RENAULT</option>
+                                    <option value={{name1:"Tata_Group",name2:"TATA"}}>TATA</option>
+                                    <option value={{name1:"DAF_Trucks",name2:"DAF"}}>DAF</option>
+                                    <option value={{name1:"Iveco",name2:"IVECO"}}>IVECO</option>
+                                    <option value={{name1:"Mercedes-Benz", name2:"Mercedes-Benz"}}>Mercedes-Benz</option>
+                                    <option value={{name1:"Volkswagen",name2:"Volkswagen"}}>Volkswagen</option>
+                                    <option value={{name1:"Volvo",name2:"VOLVO"}}>VOLVO</option>
+                                    <option value={{name1:"GAZ", name2:"GAZ"}}>GAZ</option>
+                                    <option value={{name1:"Kamaz", name2:"KAMAZ"}}>KAMAZ</option>
+                                    <option value={{name1:"UAZ", name2:"KAMAZ"}}>UAZ</option>
+                                    <option value={{name1:"ZiL", name2:"ZIL"}}>ZIL</option>
+                                    <option value={{name1:"KrAZ",name2:"KRAZ"}}>KRAZ</option>
+                                    <option value={{name1:"BelAZ",name2:"BELAZ"}}>BELAZ</option>
+                                    <option value={{name1:"Minsk_Automobile_Plant",name2:"MAZ"}}>MAZ</option>
+                                    <option value={{name1:"ZAZ",name2:"ZAZ"}}>ZAZ</option>
                                 </select>
                             </li>
                             <li>
