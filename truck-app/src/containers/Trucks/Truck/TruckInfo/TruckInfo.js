@@ -98,7 +98,7 @@ class TruckInfo extends Component {
                                 <input
                                     onChange = {event => this.setValue(event, 'priceUSD')}
                                     type="text"
-                                    defaultValue={this.props.price}
+                                    defaultValue={this.props.priceUSD}
                                 />
                             </li>
                             <li>
@@ -106,7 +106,7 @@ class TruckInfo extends Component {
                                 <input
                                     onChange = {event => this.setValue(event, 'yearGraduation')}
                                     type="text"
-                                    defaultValue={this.props.years} //get the year!!!
+                                    defaultValue={this.props.year} //get the year!!!
                                 />
                             </li>
                         </ul> 

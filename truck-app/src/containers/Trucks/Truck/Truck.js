@@ -69,7 +69,8 @@ class Truck extends Component {
                                 Country: <strong>{this.props.country}</strong>
                             </li>
                             <li>
-                                Age (years): <strong>{this.props.years}</strong>
+                                Year: <strong>{this.props.yearGraduation} </strong>
+                                ({this.props.years} years)
                             </li>
                         </ul>
                         {this.props.admin ? (
@@ -99,11 +100,13 @@ class Truck extends Component {
                     truckId={this.props.truckId}
                     visible={this.state.editing}
                     enableRegularMode={this.disableEditMode}
-                    years={this.props.years}
+                    year={this.props.yearGraduation}
                     country={this.props.country}
                     brand={this.props.brand}
                     model={this.props.model}
-                    price={this.props.price}
+                    priceUSD={this.props.priceUSD}
+                    priceEUR={this.props.priceEUR}
+                    priceUAH={this.props.priceUAH}
                     licensePlate={this.props.licensePlate}
                 />
             </div>

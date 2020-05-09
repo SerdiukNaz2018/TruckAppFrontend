@@ -112,6 +112,7 @@ class Trucks extends Component {
                         priceUSD={truck.priceUSD}
                         priceEUR={truck.priceEUR}
                         priceUAH={truck.priceUAH}
+                        yearGraduation = {truck.yearGraduation}
                         years={truck.amountYear}
                         country={truck.country}
                         licensePlate={truck.registrationPlate}
@@ -180,7 +181,7 @@ class Trucks extends Component {
                         New Truck
                     </button>
                 </div>
-                {this.state.loading ? <Spinner /> : (trucks.length === 0 ? <p>No trucks found found...</p>: trucks)}
+                {this.state.loading ? <Spinner /> : (trucks.length === 0 ? <p>No trucks found...</p>: trucks)}
             </div>
         );
     }
