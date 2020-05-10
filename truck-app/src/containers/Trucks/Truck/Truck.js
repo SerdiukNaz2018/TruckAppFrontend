@@ -95,19 +95,18 @@ class Truck extends Component {
                     </Col>
                 </Row>
                 <TruckInfo
-                    currency = {this.state.currency}
                     resetTruckList={this.props.reload}
                     truckId={this.props.truckId}
                     visible={this.state.editing}
                     enableRegularMode={this.disableEditMode}
                     year={this.props.yearGraduation}
-                    country={this.props.country}
-                    brand={this.props.brand}
+                    //country={this.props.country}
+                    //brand={this.props.brand}
                     model={this.props.model}
                     priceUSD={this.props.priceUSD}
-                    priceEUR={this.props.priceEUR}
-                    priceUAH={this.props.priceUAH}
-                    licensePlate={this.props.licensePlate}
+                    //priceEUR={this.props.priceEUR}
+                    //priceUAH={this.props.priceUAH}
+                    //licensePlate={this.props.licensePlate}
                 />
             </div>
         );

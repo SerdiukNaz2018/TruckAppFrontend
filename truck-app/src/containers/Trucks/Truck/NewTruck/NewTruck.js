@@ -24,15 +24,7 @@ class TruckInfo extends Component {
         );
     }
 
-    convertPriceYearToFloat = () => {
-        const newState = {...this.state};
-        newState.truckInformation.priceUSD = +this.state.truckInformation.priceUSD;
-        newState.truckInformation.yearGraduation = +this.state.truckInformation.yearGraduation;
-        this.setState(newState);
-    }
-
     addTruck = () => {
-        this.convertPriceYearToFloat();
         console.log(this.truckInformation);
         console.log(this.state.truckInformation);
         this.setState({ loading: true });
@@ -53,9 +45,9 @@ class TruckInfo extends Component {
             });
     };
 
-    setValue = (event, key) => {
+    setValue = (value, key) => {
         const newState = { ...this.state };
-        newState.truckInformation[key] = event.target.value;
+        newState.truckInformation[key] = value;
         this.setState(newState);
     };
 
@@ -110,7 +102,7 @@ class TruckInfo extends Component {
                                 Model:{" "}
                                 <input
                                     onChange={event =>
-                                        this.setValue(event, "model")
+                                        this.setValue(event.target.value, "model")
                                     }
                                     type="text"
                                 />
@@ -119,7 +111,7 @@ class TruckInfo extends Component {
                                 Price ($):{" "}
                                 <input
                                     onChange={event =>
-                                        this.setValue(event, "priceUSD")
+                                        this.setValue(+event.target.value, "priceUSD")
                                     }
                                     type="text"
                                 />
@@ -140,7 +132,7 @@ class TruckInfo extends Component {
                                 Year:{" "}
                                 <input
                                     onChange={event =>
-                                        this.setValue(event, "yearGraduation")
+                                        this.setValue(+event.target.value, "yearGraduation")
                                     }
                                     type="text"
                                 />
@@ -149,7 +141,7 @@ class TruckInfo extends Component {
                                 Image address:{" "}
                                 <input
                                     onChange={event =>
-                                        this.setValue(event, "imagePath")
+                                        this.setValue(event.target.value, "imagePath")
                                     }
                                     type="text"
                                 />

@@ -7,11 +7,11 @@ import Spinner from '../../../../components/UI/Spinner/Spinner';
 class TruckInfo extends Component {
     state = {
         truckInformation: {
-            priceUSD: this.props.price,
-            country: this.props.country,
-            registrationPlate: this.props.licensePlate,
-            yearGraduation: this.props.years,
-            brand: this.props.brand,
+            priceUSD: this.props.priceUSD,
+            //country: this.props.country,
+            //registrationPlate: this.props.licensePlate,
+            yearGraduation: this.props.year,
+            //brand: this.props.brand,
             model: this.props.model
         },
         loading: false
@@ -29,13 +29,14 @@ class TruckInfo extends Component {
         //     })
     }
 
-    setValue = (event, key) => {
+    setValue = (value, key) => {
         const newState = {...this.state};
-        newState.truckInformation[key] = event.target.value;
+        newState.truckInformation[key] = value;
         this.setState(newState);
     }
 
     updateTruck = () => {
+        console.log(this.props.truckId, this.state.truckInformation);
         this.setState({loading: true});
         axios
             .put(`http://localhost:8088/api/truck/${this.props.truckId}`, this.state.truckInformation)
@@ -88,7 +89,7 @@ class TruckInfo extends Component {
                             <li>
                             Model:{" "}
                                 <input
-                                    onChange = {event => this.setValue(event, 'model')}
+                                    onChange = {event => this.setValue(event.target.value, 'model')}
                                     type="text"
                                     defaultValue={this.props.model}
                                 />
@@ -96,7 +97,7 @@ class TruckInfo extends Component {
                             <li>
                                 Price ($):{" "}
                                 <input
-                                    onChange = {event => this.setValue(event, 'priceUSD')}
+                                    onChange = {event => this.setValue(+event.target.value, 'priceUSD')}
                                     type="text"
                                     defaultValue={this.props.priceUSD}
                                 />
@@ -104,9 +105,9 @@ class TruckInfo extends Component {
                             <li>
                                 Year:{" "}
                                 <input
-                                    onChange = {event => this.setValue(event, 'yearGraduation')}
+                                    onChange = {event => this.setValue(+event.target.value, 'yearGraduation')}
                                     type="text"
-                                    defaultValue={this.props.year} //get the year!!!
+                                    defaultValue={this.props.year}
                                 />
                             </li>
                         </ul> 

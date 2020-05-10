@@ -153,7 +153,7 @@ class Trucks extends Component {
                         defaultValue="Brand"
                     >
                         <option value="PriceUSD">Price</option>
-                        <option value="AmountYear">Years</option>
+                        <option value="AmountYear">Year</option>
                         <option value="Brand">Brand</option>
                         <option value="Model">Model</option>
                         <option value="Country">Country</option>
