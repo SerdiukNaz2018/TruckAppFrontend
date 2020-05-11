@@ -10,8 +10,8 @@ class TruckInfo extends Component {
             priceUSD: null,
             registrationPlate: null,
             yearGraduation: null,
-            brandSearch: 'MAN_SE',
-            brand: 'MAN',
+            brandSearch: "MAN_SE",
+            brand: "MAN",
             model: null,
         },
         loading: false,
@@ -52,12 +52,12 @@ class TruckInfo extends Component {
     };
 
     setBrand = event => {
-        const newState = {...this.state};
+        const newState = { ...this.state };
         const names = event.target.value.split(" ");
         newState.truckInformation.brandSearch = names[0];
         newState.truckInformation.brand = names[1];
         this.setState(newState);
-    }
+    };
 
     render() {
         return (
@@ -78,23 +78,35 @@ class TruckInfo extends Component {
                                 <select
                                     name="brand"
                                     id="brand"
-                                    defaultValue={this.state.truckInformation.brand}
+                                    defaultValue={
+                                        this.state.truckInformation.brand
+                                    }
                                     onChange={event => this.setBrand(event)}
                                 >
                                     <option value="MAN_SE MAN">MAN</option>
-                                    <option value="Renault RENAULT">RENAULT</option>
-                                    <option value="Tata_Group TATA">TATA</option>
+                                    <option value="Renault RENAULT">
+                                        RENAULT
+                                    </option>
+                                    <option value="Tata_Group TATA">
+                                        TATA
+                                    </option>
                                     <option value="DAF_Trucks DAF">DAF</option>
                                     <option value="Iveco IVECO">IVECO</option>
-                                    <option value="Mercedes-Benz Mercedes-Benz">Mercedes-Benz</option>
-                                    <option value="Volkswagen Volkswagen">Volkswagen</option>
+                                    <option value="Mercedes-Benz Mercedes-Benz">
+                                        Mercedes-Benz
+                                    </option>
+                                    <option value="Volkswagen Volkswagen">
+                                        Volkswagen
+                                    </option>
                                     <option value="Volvo VOLVO">VOLVO</option>
                                     <option value="GAZ GAZ">GAZ</option>
                                     <option value="Kamaz KAMAZ">KAMAZ</option>
                                     <option value="UAZ KAMAZ">UAZ</option>
                                     <option value="ZiL ZIL">ZIL</option>
                                     <option value="KrAZ KRAZ">KRAZ</option>
-                                    <option value="Minsk_Automobile_Plant MAZ">MAZ</option>
+                                    <option value="Minsk_Automobile_Plant MAZ">
+                                        MAZ
+                                    </option>
                                     <option value="ZAZ ZAZ">ZAZ</option>
                                 </select>
                             </li>
@@ -102,7 +114,10 @@ class TruckInfo extends Component {
                                 Model:{" "}
                                 <input
                                     onChange={event =>
-                                        this.setValue(event.target.value, "model")
+                                        this.setValue(
+                                            event.target.value,
+                                            "model"
+                                        )
                                     }
                                     type="text"
                                 />
@@ -111,7 +126,10 @@ class TruckInfo extends Component {
                                 Price ($):{" "}
                                 <input
                                     onChange={event =>
-                                        this.setValue(+event.target.value, "priceUSD")
+                                        this.setValue(
+                                            +event.target.value,
+                                            "priceUSD"
+                                        )
                                     }
                                     type="text"
                                 />
@@ -121,7 +139,7 @@ class TruckInfo extends Component {
                                 <input
                                     onChange={event =>
                                         this.setValue(
-                                            event,
+                                            event.target.value,
                                             "registrationPlate"
                                         )
                                     }
@@ -132,7 +150,10 @@ class TruckInfo extends Component {
                                 Year:{" "}
                                 <input
                                     onChange={event =>
-                                        this.setValue(+event.target.value, "yearGraduation")
+                                        this.setValue(
+                                            +event.target.value,
+                                            "yearGraduation"
+                                        )
                                     }
                                     type="text"
                                 />
@@ -141,7 +162,10 @@ class TruckInfo extends Component {
                                 Image address:{" "}
                                 <input
                                     onChange={event =>
-                                        this.setValue(event.target.value, "imagePath")
+                                        this.setValue(
+                                            event.target.value,
+                                            "imagePath"
+                                        )
                                     }
                                     type="text"
                                 />

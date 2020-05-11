@@ -11,17 +11,17 @@ class Trucks extends Component {
         loading: true,
         searchRequest: "",
         adding: false,
-        admin: false,
-        buttonText: "Admin",
+        admin: true,
+        //buttonText: "Admin",
     };
 
-    adminUserToggle = () => {
-        if (this.state.admin) {
-            this.setState({ admin: false, buttonText: "Admin" });
-        } else {
-            this.setState({ admin: true, buttonText: "User" });
-        }
-    };
+    // adminUserToggle = () => {
+    //     if (this.state.admin) {
+    //         this.setState({ admin: false, buttonText: "Admin" });
+    //     } else {
+    //         this.setState({ admin: true, buttonText: "User" });
+    //     }
+    // };
 
     enableAddingMode = () => {
         this.setState({ adding: true });
@@ -42,6 +42,7 @@ class Trucks extends Component {
     }
 
     setupTruckList = () => {
+        this.setState({loading: true});
         axios
             .get("http://localhost:8088/api/truck")
             .then(response => {
@@ -64,7 +65,6 @@ class Trucks extends Component {
             .then(response => {
                 this.setState({loading: false});
                 this.setState({ truckList: response.data });
-                console.log(response.data);
             })
             .catch(error => {
                 this.setState({loading: false});
@@ -90,6 +90,20 @@ class Trucks extends Component {
         this.setState({ searchRequest: event.target.value });
     };
 
+    searchHandler = event => {
+        this.setState({loading: true});
+        axios
+            .get(`http://localhost:8088/api/truck?SearchQuery=${event.target.value}`)
+            .then(response => {
+                this.setState({loading: false});
+                this.setState({ truckList: response.data });
+            })
+            .catch(error => {
+                this.setState({loading: false});
+                console.log(error);
+            });
+    }
+
     reverseTruckList = () => {
         const reversed = [...this.state.truckList];
         reversed.reverse();
@@ -97,7 +111,6 @@ class Trucks extends Component {
     };
 
     render() {
-        console.log("rendered");
         let trucks = <p>Loading...</p>;
 
         if (!this.state.loading) {
@@ -117,7 +130,7 @@ class Trucks extends Component {
                         country={truck.country}
                         licensePlate={truck.registrationPlate}
                         source={truck.imagePath}
-                        admin={this.state.admin} //!!!!!
+                        admin={this.state.admin}
                     />
                 );
             });
@@ -137,12 +150,12 @@ class Trucks extends Component {
                 />
                 <button onClick={this.searchButtonHandler}>Search</button>
 
-                <button
+                {/* <button
                     style={{ borderRadius: "10px", margin: '10px' }}
                     onClick={this.adminUserToggle}
                 >
                     {this.state.buttonText}
-                </button>
+                </button> */}
 
                 <div style={{ margin: "10px" }}>
                     <label htmlFor="sort">Sort by: </label>

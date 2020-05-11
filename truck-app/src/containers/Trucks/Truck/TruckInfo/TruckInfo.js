@@ -36,7 +36,7 @@ class TruckInfo extends Component {
     }
 
     updateTruck = () => {
-        console.log(this.props.truckId, this.state.truckInformation);
+        console.log(`http://localhost:8088/api/truck/${this.props.truckId}`, this.state.truckInformation);
         this.setState({loading: true});
         axios
             .put(`http://localhost:8088/api/truck/${this.props.truckId}`, this.state.truckInformation)
