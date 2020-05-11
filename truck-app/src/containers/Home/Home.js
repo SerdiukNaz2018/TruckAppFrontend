@@ -1,48 +1,64 @@
 import React, { Component } from "react";
 import classes from "./Home.module.css";
+import LoginForm from "./LoginForm/LoginForm";
+import UserBlock from "./UserBlock/UserBlock";
+import UserList from "./UserList/UserList";
 
 class Home extends Component {
     state = {
-        login: "",
-        password: "",
+        loggining: true,
+        status: null,
+        id: null,
+        fullName: null,
+        age: null,
+        sex: null,
+        email: null,
+        dateOfBirth: null,
+        imagePath: null,
     };
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    setValue = (value, key) => {
-        const newState = { ...this.state };
-        newState[key] = value;
-        this.setState(newState);
+    disableLoginForm = () => {
+        this.setState({ loggining: false });
     };
 
-    okButtonHandler = () => {
-        console.log(this.state);
-    }
+    setUserInfo = data => {
+        if (data) {
+            this.setState({
+                loggining: false,
+                status: data.role,
+                id: data.id,
+                fullName: data.fullName,
+                age: data.years,
+                sex: data.sex,
+                email: data.email,
+                dateOfBirth: data.dateOfBirth,
+                imagePath: data.imagePath,
+            });
+        }
+    };
 
     render() {
         return (
             <div className={classes.Home}>
-                <div className={classes.AuthorizationForm}>
-                    <h3>Sign in:</h3>
-                    <input
-                        type="email"
-                        placeholder="login"
-                        onChange={event =>
-                            this.setValue(event.target.value, "login")
-                        }
-                    />
-                    <input
-                        type="password"
-                        placeholder="password"
-                        onChange={event =>
-                            this.setValue(event.target.value, "password")
-                        }
-                    />
-                    <button style={{ width: "80px" }} onClick = {this.okButtonHandler}>OK</button>
-                    <small>I forgot my password</small>
-                </div>
+                <LoginForm
+                    visible={this.state.loggining}
+                    enableRegularMode={this.disableLoginForm}
+                    setUserInfo={this.setUserInfo}
+                />
+                {this.state.status ? (
+                    <React.Fragment>
+                        <UserBlock 
+                            name = {this.state.fullName}
+                            age = {this.state.age}
+                            email = {this.state.email}
+                            sex = {this.state.sex}
+                            dateOfBirth = {this.state.dateOfBirth}
+                            imagePath = {this.state.imagePath}
+                            status = {this.state.status}
+                        />
+                        {this.state.status === "admin" ? <UserList /> : null}
+                    </React.Fragment>
+                ) : null}
             </div>
         );
     }

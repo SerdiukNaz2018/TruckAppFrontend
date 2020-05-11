@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import classes from "./Truck.module.css";
 import { Row, Col } from "react-bootstrap";
-import axios from "axios";
 import TruckInfo from "./TruckInfo/TruckInfo";
 
 class Truck extends Component {
