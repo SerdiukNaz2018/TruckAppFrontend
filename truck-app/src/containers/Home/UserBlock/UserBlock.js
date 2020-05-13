@@ -8,7 +8,6 @@ const userBlock = props => (
             <Col md={6}>
                 <img src={props.imagePath} alt="person" />
             </Col>
-
             <Col md={6}>
                 <h1>
                     {props.name}

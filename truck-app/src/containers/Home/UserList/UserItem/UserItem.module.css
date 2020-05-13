@@ -10,22 +10,11 @@
 }
 
 .UserItem img {
-    width: 200px;
-    height: 200px;
-    border-radius: 20px 0px 0px 20px;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
 }
 
 .UserItem .Col {
     height: 100%;
-}
-
-.UserItem select {
-    border-radius: 10px;
-    margin: 5px;
-}
-
-@media( max-width: 766px) {
-    .UserItem img {
-        border-radius: 20px;
-    }
 }
