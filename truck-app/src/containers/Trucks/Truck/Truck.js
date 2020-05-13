@@ -38,9 +38,9 @@ class Truck extends Component {
         return (
             <div className={classes.Truck}>
                 <Row>
-                    <Col md={6}>
-                        <img src={this.props.source} alt="truck" />
-                    </Col>
+                    
+                    {!this.props.preview ? <Col md={6}> <img src={this.props.source} alt="truck" /> </Col> : null}
+                    
                     <Col md={6}>
                         <h1>
                             {this.props.brand} {this.props.model}

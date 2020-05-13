@@ -5,7 +5,7 @@ import SideDrawer from '../../components/UI/Sidedrawer/Sidedrawer';
 
 class Layout extends Component {
     state = {
-        showSideDrawer: false
+        showSideDrawer: false,
     }
 
     disableSideDrawer = () => {

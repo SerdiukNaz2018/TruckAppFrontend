@@ -13,6 +13,7 @@ class TruckInfo extends Component {
             brandSearch: "MAN_SE",
             brand: "MAN",
             model: null,
+            userId: this.props.userId
         },
         loading: false,
     };

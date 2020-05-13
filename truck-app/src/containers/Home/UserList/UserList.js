@@ -1,5 +1,6 @@
 import React from "react";
 import UserItem from "./UserItem/UserItem";
+import classes from './UserList.module.css';
 import axios from "axios";
 import { Component } from "react";
 
@@ -23,6 +24,7 @@ class UserList extends Component {
                         name={user.fullName}
                         age={user.years}
                         country={user.country}
+                        trucks = {user.truck}
                     />
                 ));
                 this.setState({ userList: userItems });
@@ -33,7 +35,13 @@ class UserList extends Component {
     }
 
     render() {
-        return this.state.userList;
+    return (
+        <div className = {classes.UserList}>
+            <h2>Users: </h2>
+            {this.state.userList}
+        </div>
+    );
+        
     }
 }
 
