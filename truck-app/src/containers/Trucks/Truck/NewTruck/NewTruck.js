@@ -13,37 +13,80 @@ class TruckInfo extends Component {
             brandSearch: "MAN_SE",
             brand: "MAN",
             model: null,
-            userId: this.props.userId
+            userId: this.props.userId,
         },
-        loading: false,
+        priceError: "",
+        plateError: "",
+        yearError: "",
+        modelError: "",
+    };
+
+    validate = () => {
+        this.setState({priceError: "", plateError: "", modelError: "", yearError: ""});
+
+        let pricePattern = /^\+?(0|[1-9]\d*)$/;
+        let platePattern = /^[A-Za-z]{2}[0-9]{4}[A-Za-z]{2}$/;
+        let yearPattern = /^(19[0-9][0-9]|20[0-1][0-9]|2020)$/;
+        let modelPattern = /^[a-zA-Z 0-9]+$/;
+        let check = true;
+
+        if (!pricePattern.test(this.state.truckInformation.priceUSD)) {
+            this.setState({ priceError: "*Price has to be an integer" });
+            check = false;
+        }
+
+        if (!yearPattern.test(this.state.truckInformation.yearGraduation)) {
+            this.setState({ yearError: "*Year has to be an integer" });
+            check = false;
+        }
+
+        if (!platePattern.test(this.state.truckInformation.registrationPlate)) {
+            this.setState({ plateError: "*The form of license plate must be: 'DD1111DD'" });
+            check = false;
+        }
+
+        if (!modelPattern.test(this.state.truckInformation.model)) {
+            this.setState({ modelError: "*Model should not contain any special caracters" });
+            check = false;
+        }
+
+        return check;
     };
 
     shouldComponentUpdate(nextProps, nextState) {
         return (
             nextProps.visible !== this.props.visible ||
-            nextState.loading !== this.state.loading
+            nextState.loading !== this.state.loading ||
+            nextState.priceError !== this.state.priceError ||
+            nextState.plateError !== this.state.plateError ||
+            nextState.modelError !== this.state.modelError ||
+            nextState.yearError !== this.state.yearError
         );
     }
 
     addTruck = () => {
-        console.log(this.truckInformation);
-        console.log(this.state.truckInformation);
-        this.setState({ loading: true });
-        axios
-            .post(
-                "http://localhost:8088/api/truck",
-                this.state.truckInformation
-            )
-            .then(response => {
-                this.setState({ loading: false });
-                this.props.enableRegularMode();
-                this.props.resetTruckList();
-            })
-            .catch(error => {
-                this.setState({ loading: false });
-                this.props.enableRegularMode();
-                console.log(error);
+        let valid = this.validate();
+        if (valid) {
+            this.setState({
+                loading: true,
+                
             });
+            axios
+                .post(
+                    "http://localhost:8088/api/truck",
+                    this.state.truckInformation
+                )
+                .then(response => {
+                    this.setState({ loading: false });
+                    this.props.enableRegularMode();
+                    this.props.resetTruckList();
+                })
+                .catch(error => {
+                    this.setState({ loading: false });
+                    this.props.enableRegularMode();
+                    console.log(error);
+                });
+        }
     };
 
     setValue = (value, key) => {
@@ -122,6 +165,9 @@ class TruckInfo extends Component {
                                     }
                                     type="text"
                                 />
+                                <div style={{ color: "red" }}>
+                                    {this.state.modelError}
+                                </div>
                             </li>
                             <li>
                                 Price ($):{" "}
@@ -134,6 +180,9 @@ class TruckInfo extends Component {
                                     }
                                     type="text"
                                 />
+                                <div style={{ color: "red" }}>
+                                    {this.state.priceError}
+                                </div>
                             </li>
                             <li>
                                 License Plate:{" "}
@@ -146,6 +195,9 @@ class TruckInfo extends Component {
                                     }
                                     type="text"
                                 />
+                                <div style={{ color: "red" }}>
+                                    {this.state.plateError}
+                                </div>
                             </li>
                             <li>
                                 Year:{" "}
@@ -158,6 +210,9 @@ class TruckInfo extends Component {
                                     }
                                     type="text"
                                 />
+                                <div style={{ color: "red" }}>
+                                    {this.state.yearError}
+                                </div>
                             </li>
                             <li>
                                 Image address:{" "}
