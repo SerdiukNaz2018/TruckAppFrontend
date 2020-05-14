@@ -13,11 +13,11 @@ const userBlock = props => (
                     {props.name}
                 </h1>
                 <ul>
-                    <li><p>age: {props.age}</p></li>
-                    <li><p>sex: {props.sex}</p></li>
-                    <li><p>status: {props.status}</p></li>
-                    <li><p>date of birth: {props.dateOfBirth}</p></li>
-                    <li><p>e-mail: {props.email}</p></li>
+                    <li><p><strong>age: </strong>{props.age}</p></li>
+                    <li><p><strong>sex: </strong> {props.sex}</p></li>
+                    <li><p><strong>status: </strong>{props.status}</p></li>
+                    <li><p><strong>date of birth: </strong>{props.dateOfBirth}</p></li>
+                    <li><p><strong>e-mail: </strong>{props.email}</p></li>
                 </ul>
             </Col>
         </Row>

@@ -64,13 +64,17 @@ class Truck extends Component {
                                 License plate:{" "}
                                 <strong>{this.props.licensePlate}</strong>
                             </li>
-                            <li>
-                                Country: <strong>{this.props.country}</strong>
-                            </li>
-                            <li>
-                                Year: <strong>{this.props.yearGraduation} </strong>
-                                {this.props.years !== 0 ? this.props.years === 1 ? <span>({this.props.years} year)</span> :<span>({this.props.years} years)</span> : <span>(new)</span>}
-                            </li>
+                            {!this.props.preview ? 
+                            <React.Fragment>
+                                <li>
+                                    Country: <strong>{this.props.country}</strong>
+                                </li>
+                                <li>
+                                    Year: <strong>{this.props.yearGraduation} </strong>
+                                    {this.props.years !== 0 ? this.props.years === 1 ? <span>({this.props.years} year)</span> :<span>({this.props.years} years)</span> : <span>(new)</span>}
+                                </li> 
+                            </React.Fragment>
+                            : null}
                         </ul>
                         {this.props.admin ? (
                             <div

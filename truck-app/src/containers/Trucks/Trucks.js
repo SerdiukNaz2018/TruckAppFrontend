@@ -16,7 +16,6 @@ class Trucks extends Component {
         searchRequest: "",
         adding: false,
         loggining: true,
-
         userInfo: {
             status: null,
             id: null,
@@ -28,7 +27,6 @@ class Trucks extends Component {
             imagePath: null,
         },
     };
-
     disableLoginForm = () => {
         this.setState({ loggining: false });
     };
@@ -68,7 +66,8 @@ class Trucks extends Component {
             this.state.admin !== nextState.admin ||
             this.state.loggining !== nextState.loggining ||
             JSON.stringify(this.state.userInfo) !==
-                JSON.stringify(nextState.userInfo)
+                JSON.stringify(nextState.userInfo) ||
+            nextState.showUsers !== this.state.showUsers
         );
     }
 
@@ -238,6 +237,7 @@ class Trucks extends Component {
                             ↑ ↓
                         </button>
                     </div>
+                    {this.state.userInfo.status !== 'admin' ?
                     <div>
                         <button
                             style={{
@@ -250,6 +250,7 @@ class Trucks extends Component {
                             New Truck
                         </button>
                     </div>
+                    : null}
                     {this.state.loading ? (
                         <Spinner />
                     ) : trucks.length === 0 ? (

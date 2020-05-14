@@ -22,7 +22,7 @@ class UserList extends Component {
                         key={index}
                         source={user.imagePath}
                         name={user.fullName}
-                        age={user.years}
+                        age={user.age}
                         country={user.country}
                         trucks = {user.truck}
                     />
@@ -37,7 +37,7 @@ class UserList extends Component {
     render() {
     return (
         <div className = {classes.UserList}>
-            <h2>Users: </h2>
+            <h2>Users</h2>
             {this.state.userList}
         </div>
     );
