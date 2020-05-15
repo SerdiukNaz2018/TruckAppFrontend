@@ -5,11 +5,14 @@ import axios from "axios";
 class LoginForm extends Component {
     state = {
         email: "",
-        password: ""
+        password: "",
     };
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.visible !== this.props.visible || nextState.status !== this.state.status;
+        return (
+            nextProps.visible !== this.props.visible ||
+            nextState.status !== this.state.status
+        );
     }
 
     setValue = (value, key) => {
@@ -21,9 +24,9 @@ class LoginForm extends Component {
     okButtonHandler = () => {
         console.log(this.state);
         axios
-            .post('http://localhost:8088/api/user/login', this.state)
+            .post("http://localhost:8088/api/user/login", this.state)
             .then(response => {
-                this.props.setUserInfo(response.data)
+                this.props.setUserInfo(response.data);
                 console.log(response.data);
             })
             .catch(error => {
@@ -62,6 +65,9 @@ class LoginForm extends Component {
                     onClick={this.okButtonHandler}
                 >
                     OK
+                </button>
+                <button style={{ width: "80px" }} onClick={this.props.signUp}>
+                    Sign Up
                 </button>
             </div>
         );

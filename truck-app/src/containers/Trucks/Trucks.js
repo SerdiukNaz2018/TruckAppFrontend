@@ -8,6 +8,7 @@ import loginClasses from "../Home/Home.module.css";
 import LoginForm from "../Home/LoginForm/LoginForm";
 import UserBlock from "../Home/UserBlock/UserBlock";
 import UserList from "../Home/UserList/UserList";
+import SignUpForm from '../Home/SignUpForm/SignUpForm';
 
 class Trucks extends Component {
     state = {
@@ -16,6 +17,7 @@ class Trucks extends Component {
         searchRequest: "",
         adding: false,
         loggining: true,
+        signingUp: false,
         userInfo: {
             status: null,
             id: null,
@@ -27,6 +29,15 @@ class Trucks extends Component {
             imagePath: null,
         },
     };
+
+    disableSignUp = () => {
+        this.setState({signingUp: false, loggining: true});
+    }
+
+    enableSignUp = () => {
+        this.setState({signingUp: true, loggining: false});
+    }
+
     disableLoginForm = () => {
         this.setState({ loggining: false });
     };
@@ -67,7 +78,8 @@ class Trucks extends Component {
             this.state.loggining !== nextState.loggining ||
             JSON.stringify(this.state.userInfo) !==
                 JSON.stringify(nextState.userInfo) ||
-            nextState.showUsers !== this.state.showUsers
+            nextState.showUsers !== this.state.showUsers ||
+            nextState.signingUp !== this.state.signingUp
         );
     }
 
@@ -172,11 +184,13 @@ class Trucks extends Component {
 
         return (
             <React.Fragment>
+                <SignUpForm visible = {this.state.signingUp} close = {this.disableSignUp}/>
                 <div className={loginClasses.Home}>
                     <LoginForm
                         visible={this.state.loggining}
                         enableRegularMode={this.disableLoginForm}
                         setUserInfo={this.setUserInfo}
+                        signUp = {this.enableSignUp}
                     />
                     {this.state.userInfo.status ? (
                         <React.Fragment>
@@ -196,7 +210,7 @@ class Trucks extends Component {
                     ) : null}
                 </div>
 
-                { !this.state.loggining ?
+                { !this.state.loggining && !this.state.signingUp?
                 <div className={classes.Trucks}>
                     <h2>Trucks: </h2>
                     <NewTruck

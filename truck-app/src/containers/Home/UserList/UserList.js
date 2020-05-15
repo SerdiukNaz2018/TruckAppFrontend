@@ -3,10 +3,11 @@ import UserItem from "./UserItem/UserItem";
 import classes from './UserList.module.css';
 import axios from "axios";
 import { Component } from "react";
+import Spinner from '../../../components/UI/Spinner/Spinner';
 
 class UserList extends Component {
     state = {
-        userList: null,
+        userList: <Spinner/>,
     };
 
     componentDidMount() {

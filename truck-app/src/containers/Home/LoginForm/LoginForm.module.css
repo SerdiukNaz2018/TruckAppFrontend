@@ -1,5 +1,6 @@
 .LoginForm {
-    position: fixed;
+    margin: auto;
+    position: absolute;
     z-index: 500;
     background-color: white;
     width: 500px;
@@ -29,6 +30,19 @@
     display: block;
     background-color: rgb(61, 83, 83);
     color: white;
+}
+
+.LoginForm select{
+    border-radius: 10px;
+    margin: 10px auto;
+    display: inline-block;
+}
+
+.LoginForm select :active{
+    height: 100px;
+    border-radius: 10px;
+    margin: 10px auto;
+    display: inline-block;
 }
 
 @media( max-width: 600px) {
