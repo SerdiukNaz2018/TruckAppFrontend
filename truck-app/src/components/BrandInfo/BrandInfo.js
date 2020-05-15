@@ -15,13 +15,13 @@ class BrandInfo extends Component {
     searchforBrand = () => {
         this.setState({loading: true});
         axios
-            .get(`url/brendSearch={${this.state.brandSearch}}`)
+            .get(`http://localhost:8088/api/about/{${this.state.brandSearch}}`)
             .then(response => {
                 this.setState({country: response.data.country, imagePath: response.data.imagePath, loading: false});
             })
             .catch(error => {
                 console.log(error);
-            })
+            });
     };
 
     setBrand = event => {
