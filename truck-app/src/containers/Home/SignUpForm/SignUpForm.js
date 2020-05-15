@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import classes from "../LoginForm/LoginForm.module.css";
 import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
+import Spinner from "../../../components/UI/Spinner/Spinner";
 
 class SignUpForm extends Component {
     state = {
+        loading: false,
         email: "",
         password: "",
         passwordConf: "",
@@ -20,10 +22,17 @@ class SignUpForm extends Component {
         passwordError: "",
         firstNameError: "",
         secondNameError: "",
+        authError: "",
     };
 
     validate = () => {
-        this.setState({ firstNameError: "", secondNameError: "", emailError: "", passwordError: "" });
+        this.setState({
+            authError: "",
+            firstNameError: "",
+            secondNameError: "",
+            emailError: "",
+            passwordError: "",
+        });
         let check = true;
 
         if (
@@ -46,12 +55,18 @@ class SignUpForm extends Component {
         }
 
         if (!/^[A-Za-z]+$/.test(this.state.firstName)) {
-            this.setState({ firstNameError: "first name can't include any special cahracters" });
+            this.setState({
+                firstNameError:
+                    "first name can't include any special cahracters",
+            });
             check = false;
         }
 
         if (!/^[A-Za-z]+$/.test(this.state.secondName)) {
-            this.setState({ secondNameError: "last name can't include any special cahracters" });
+            this.setState({
+                secondNameError:
+                    "last name can't include any special cahracters",
+            });
             check = false;
         }
 
@@ -64,7 +79,8 @@ class SignUpForm extends Component {
             nextState.status !== this.state.status ||
             nextState.passwordError !== this.state.passwordError ||
             nextState.emailError !== this.state.emailError ||
-            nextState.firstNameError !== this.state.secondNameError
+            nextState.firstNameError !== this.state.secondNameError ||
+            nextState.authError !== this.state.authError
         );
     }
 
@@ -83,16 +99,7 @@ class SignUpForm extends Component {
     okButtonHandler = () => {
         let valid = this.validate();
         if (valid) {
-            console.log({
-                firstName: this.state.firstName,
-                lastName: this.state.secondName,
-                confirmPassword: this.state.passwordConf,
-                email: this.state.email,
-                password: this.state.password,
-                dateOfBirth: `${this.state.day}.${this.state.month}.${this.state.year}`,
-                sex: this.state.sex,
-                imagePath: this.state.imagePath,
-            });
+            this.setState({ loading: true });
             axios
                 .post("http://localhost:8088/api/user/create", {
                     firstName: this.state.firstName,
@@ -106,9 +113,13 @@ class SignUpForm extends Component {
                 })
                 .then(response => {
                     this.props.close();
+                    this.setState({ loading: false });
                 })
                 .catch(error => {
-                    this.props.close();
+                    this.setState({
+                        loading: false,
+                        authError: "The e-mail is already in use",
+                    });
                 });
         }
     };
@@ -147,7 +158,7 @@ class SignUpForm extends Component {
             <div
                 className={classes.LoginForm}
                 style={{
-                    top: '20%',
+                    top: "20%",
                     opacity: this.props.visible ? 1 : 0,
                     transform: this.props.visible
                         ? "translateY(0)"
@@ -155,112 +166,135 @@ class SignUpForm extends Component {
                 }}
             >
                 <h3>Sign Up:</h3>
+                {this.state.loading ? (
+                    <Spinner />
+                ) : (
+                    <React.Fragment>
+                        <Row>
+                            <Col md={6}>
+                                <input
+                                    type="text"
+                                    placeholder="first name"
+                                    onChange={event =>
+                                        this.setValue(
+                                            event.target.value,
+                                            "firstName"
+                                        )
+                                    }
+                                />
 
-                <Row>
-                    <Col md={6}>
-                        <input
-                            type="text"
-                            placeholder="first name"
-                            onChange={event =>
-                                this.setValue(event.target.value, "firstName")
-                            }
-                        />
+                                <input
+                                    type="text"
+                                    placeholder="last name"
+                                    onChange={event =>
+                                        this.setValue(
+                                            event.target.value,
+                                            "secondName"
+                                        )
+                                    }
+                                />
+                                <input
+                                    type="email"
+                                    placeholder="e-mail"
+                                    onChange={event =>
+                                        this.setValue(
+                                            event.target.value,
+                                            "email"
+                                        )
+                                    }
+                                />
+                            </Col>
+                            <Col md={6}>
+                                <input
+                                    type="password"
+                                    placeholder="password"
+                                    onChange={event =>
+                                        this.setValue(
+                                            event.target.value,
+                                            "password"
+                                        )
+                                    }
+                                />
 
-                        <input
-                            type="text"
-                            placeholder="last name"
-                            onChange={event =>
-                                this.setValue(event.target.value, "secondName")
-                            }
-                        />
-                        <input
-                            type="email"
-                            placeholder="e-mail"
-                            onChange={event =>
-                                this.setValue(event.target.value, "email")
-                            }
-                        />
-                    </Col>
-                    <Col md={6}>
-                        <input
-                            type="password"
-                            placeholder="password"
-                            onChange={event =>
-                                this.setValue(event.target.value, "password")
-                            }
-                        />
+                                <input
+                                    type="password"
+                                    placeholder="confirm password"
+                                    onChange={event =>
+                                        this.setValue(
+                                            event.target.value,
+                                            "passwordConf"
+                                        )
+                                    }
+                                />
 
-                        <input
-                            type="password"
-                            placeholder="confirm password"
+                                <input
+                                    type="imageAdress"
+                                    placeholder="image adress"
+                                    onChange={event =>
+                                        this.setValue(
+                                            event.target.value,
+                                            "imagePath"
+                                        )
+                                    }
+                                />
+                            </Col>
+                        </Row>
+                        <select
+                            name="sex"
+                            id="sex"
                             onChange={event =>
-                                this.setValue(
-                                    event.target.value,
-                                    "passwordConf"
-                                )
+                                this.setValue(event.target.value, "sex")
                             }
-                        />
+                        >
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                        <div>
+                            <select
+                                name="day"
+                                defaultValue="dd"
+                                onChange={event =>
+                                    this.setValue(event.target.value, "day")
+                                }
+                            >
+                                <option value="dd">dd</option>
+                                {daysOpt}
+                            </select>
+                            <select
+                                name="month"
+                                defaultValue="mm"
+                                onChange={event =>
+                                    this.setValue(event.target.value, "month")
+                                }
+                            >
+                                <option value="mm">mm</option>
+                                {monthsOpt}
+                            </select>
+                            <select
+                                name="year"
+                                defaultValue="yy"
+                                onChange={event =>
+                                    this.setValue(event.target.value, "year")
+                                }
+                            >
+                                <option value="yy">yy</option>
+                                {yearsOpt}
+                            </select>
+                        </div>
 
-                        <input
-                            type="imageAdress"
-                            placeholder="image adress"
-                            onChange={event =>
-                                this.setValue(event.target.value, "imagePath")
-                            }
-                        />
-                    </Col>
-                </Row>
-                <Row></Row>
-                <select
-                    name="sex"
-                    id = "sex"
-                    onChange={event => this.setValue(event.target.value, "sex")}
-                >
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
-                <div>
-                    <select
-                        name="day"
-                        defaultValue = "dd"
-                        onChange={event =>
-                            this.setValue(event.target.value, "day")
-                        }
-                    >
-                        <option value="dd">dd</option>
-                        {daysOpt}
-                    </select>
-                    <select
-                        name="month"
-                        defaultValue = "mm"
-                        onChange={event =>
-                            this.setValue(event.target.value, "month")
-                        }
-                    >
-                        <option value="mm">mm</option>
-                        {monthsOpt}
-                    </select>
-                    <select
-                        name="year"
-                        defaultValue = "yy"
-                        onChange={event =>
-                            this.setValue(event.target.value, "year")
-                        }
-                    >
-                        <option value="yy">yy</option>
-                        {yearsOpt}
-                    </select>
-                </div>
-
-                <div style={{ color: "red" }}>
-                    <small>{this.state.emailError}</small>
-                    <br />
-                    <small>{this.state.passwordError}</small>
-                    <br/>
-                    <small>{this.state.firstNameError}</small>
-                    <br/>
-                    <small>{this.state.secondNameError}</small>
-                </div>
+                        <div style={{ color: "red" }}>
+                            <small>{this.state.emailError}</small>
+                            <br />
+                            <small>{this.state.passwordError}</small>
+                            <br />
+                            <small>{this.state.firstNameError}</small>
+                            <br />
+                            <small>{this.state.secondNameError}</small>
+                            <br />
+                            <small>{this.state.authError}</small>
+                        </div>
+                    </React.Fragment>
+                )}
                 <button
                     style={{ width: "80px" }}
                     onClick={this.okButtonHandler}

@@ -20,6 +20,7 @@ class Trucks extends Component {
         signingUp: false,
         userInfo: {
             status: null,
+            isActive: null,
             id: null,
             fullName: null,
             age: null,
@@ -45,7 +46,7 @@ class Trucks extends Component {
     setUserInfo = data => {
         const newState = { ...this.state };
         newState.loggining = false;
-
+        newState.userInfo.isActive = data.isActive;
         newState.userInfo.age = data.years;
         newState.userInfo.sex = data.sex;
         newState.userInfo.email = data.email;

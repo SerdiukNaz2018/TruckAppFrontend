@@ -6,12 +6,15 @@ class LoginForm extends Component {
     state = {
         email: "",
         password: "",
+
+        errorMessage: ""
     };
 
     shouldComponentUpdate(nextProps, nextState) {
         return (
             nextProps.visible !== this.props.visible ||
-            nextState.status !== this.state.status
+            nextState.status !== this.state.status ||
+            nextState.errorMessage !== this.state.errorMessage
         );
     }
 
@@ -24,13 +27,14 @@ class LoginForm extends Component {
     okButtonHandler = () => {
         console.log(this.state);
         axios
-            .post("http://localhost:8088/api/user/login", this.state)
+            .post("http://localhost:8088/api/user/login", {email: this.state.email, password: this.state.password})
             .then(response => {
                 this.props.setUserInfo(response.data);
                 console.log(response.data);
             })
             .catch(error => {
                 console.log(error);
+                this.setState({errorMessage: 'This account is not accessible. Check you login/password or contact administrator to inform you whether you are active or banned'});
             });
     };
 
@@ -47,7 +51,7 @@ class LoginForm extends Component {
             >
                 <h3>Sign in:</h3>
                 <input
-                    type="email"
+                    type="login"
                     placeholder="e-mail"
                     onChange={event =>
                         this.setValue(event.target.value, "email")
@@ -60,6 +64,9 @@ class LoginForm extends Component {
                         this.setValue(event.target.value, "password")
                     }
                 />
+                {this.state.errorMessage ? 
+                    <div style = {{color: 'red'}}><p>{this.state.errorMessage}</p></div> : null
+                }
                 <button
                     style={{ width: "80px" }}
                     onClick={this.okButtonHandler}

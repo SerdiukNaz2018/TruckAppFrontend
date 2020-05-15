@@ -46,12 +46,6 @@ const userBlock = props => {
                             </li>
                             <li>
                                 <p>
-                                    <strong>date of birth: </strong>
-                                    {props.dateOfBirth}
-                                </p>
-                            </li>
-                            <li>
-                                <p>
                                     <strong>e-mail: </strong>
                                     {props.email}
                                 </p>

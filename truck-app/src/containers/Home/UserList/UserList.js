@@ -21,6 +21,8 @@ class UserList extends Component {
                 let userItems = users.map((user, index) => (
                     <UserItem
                         key={index}
+                        userId = {user.id}
+                        isActive = {user.isActive}
                         source={user.imagePath}
                         name={user.fullName}
                         age={user.age}
@@ -33,10 +35,6 @@ class UserList extends Component {
             .catch(error => {
                 console.log(error);
             });
-    }
-
-    setUpUserInfo = () => {
-        
     }
 
     render() {
