@@ -36,12 +36,13 @@ class Truck extends Component {
 
     render() {
         return (
-            <div className={classes.Truck}>
+            <div className={classes.Truck}
+            style={{width: this.props.preview ? 'fit-content' : '70%', display: this.props.preview ? 'inline' : 'block'}}>
                 <Row>
                     
-                    {!this.props.preview ? <Col md={6}> <img src={this.props.source} alt="truck" /> </Col> : null}
+                    {!this.props.preview ? <Col md={6} style = {{overflow: 'hidden'}}> <img src={this.props.source} alt="truck" /> </Col> : null}
                     
-                    <Col md={6}>
+                    <Col md={!this.props.preview ? 6 : null}>
                         <h1>
                             {this.props.brand} {this.props.model}
                         </h1>

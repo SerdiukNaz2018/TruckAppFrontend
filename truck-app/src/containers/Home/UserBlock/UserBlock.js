@@ -9,7 +9,7 @@ const userBlock = props => {
     return (
         <div className={classes.UserBlock}>
         <Row>
-            <Col md={6}>
+            <Col md={6} style={classes.imageHolder}>
                 <img src={props.imagePath} alt="person" />
             </Col>
             <Col md={6}>
@@ -22,7 +22,8 @@ const userBlock = props => {
                     <li><p><strong>status: </strong>{props.status}</p></li>
                     <li><p><strong>date of birth: </strong>{props.dateOfBirth}</p></li>
                     <li><p><strong>e-mail: </strong>{props.email}</p></li>
-                    <button onClick = {reload}>Log Out</button>
+                    <li><p><strong>country: </strong>{props.country}</p></li>
+                    <button style = {{position: 'absolute', top: '5px', right: '20px'}} onClick = {reload}>Log Out</button>
                 </ul>
             </Col>
         </Row>

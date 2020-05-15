@@ -36,8 +36,8 @@ class UserItem extends Component {
         return (
             <div className={classes.UserItem} onClick = {this.trucksToggle}>
                 <Row>
-                    <Col md={6}>
-                        <img src={this.props.source} alt="user" />
+                    <Col md={6} style = {{textAlign:'center'}}>
+                        <img src={this.props.source} width = "100%" height='100%' alt="user" />
                     </Col>
                     <Col md={6}>
                         <ul>

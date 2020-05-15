@@ -55,6 +55,7 @@ class Trucks extends Component {
         newState.userInfo.fullName = data.fullName;
         newState.userInfo.id = data.id;
         newState.userInfo.status = data.role;
+        newState.userInfo.country = data.country;
 
         this.setState(newState);
 
@@ -202,6 +203,7 @@ class Trucks extends Component {
                                 dateOfBirth={this.state.userInfo.dateOfBirth}
                                 imagePath={this.state.userInfo.imagePath}
                                 status={this.state.userInfo.status}
+                                country = {this.state.userInfo.country}
                             />
                             {this.state.userInfo.status === "admin" ? (
                                 <UserList />

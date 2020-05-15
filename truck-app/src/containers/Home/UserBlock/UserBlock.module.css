@@ -8,8 +8,8 @@
 }
 
 .UserBlock img {
-    width: 300px;
-    height: 300px;
+    width: 100%;
+    height: 100%;
     border-radius: 20px;
 }
 
@@ -24,4 +24,19 @@
     outline: 0;
    -webkit-box-shadow: none;
    box-shadow: none;
+}
+.ImageHolder {
+    text-align: center;
+}
+
+@media(min-width: 800px) {
+    .ImageHolder {
+        text-align: left;
+    }
+
+    .UserBlock img {
+        width:300px;
+        height: 300px;
+    }
+
 }

@@ -51,7 +51,7 @@ class SignUpForm extends Component {
         }
 
         if (!/^[A-Za-z]+$/.test(this.state.secondName)) {
-            this.setState({ secondNameError: "second name can't include any special cahracters" });
+            this.setState({ secondNameError: "last name can't include any special cahracters" });
             check = false;
         }
 
@@ -63,7 +63,8 @@ class SignUpForm extends Component {
             nextProps.visible !== this.props.visible ||
             nextState.status !== this.state.status ||
             nextState.passwordError !== this.state.passwordError ||
-            nextState.emailError !== this.state.emailError
+            nextState.emailError !== this.state.emailError ||
+            nextState.firstNameError !== this.state.secondNameError
         );
     }
 
@@ -173,7 +174,7 @@ class SignUpForm extends Component {
                             }
                         />
                         <input
-                            type="login"
+                            type="email"
                             placeholder="e-mail"
                             onChange={event =>
                                 this.setValue(event.target.value, "email")

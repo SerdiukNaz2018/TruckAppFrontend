@@ -35,6 +35,10 @@ class UserList extends Component {
             });
     }
 
+    setUpUserInfo = () => {
+        
+    }
+
     render() {
     return (
         <div className = {classes.UserList}>
