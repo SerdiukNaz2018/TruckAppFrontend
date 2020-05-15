@@ -15,18 +15,18 @@ class BrandInfo extends Component {
     searchforBrand = () => {
         this.setState({loading: true});
         axios
-            .get(`http://localhost:8088/api/about/{${this.state.brandSearch}}`)
+            .get(`http://localhost:8088/api/about/${this.state.brandSearch}`)
             .then(response => {
                 this.setState({country: response.data.country, imagePath: response.data.imagePath, loading: false});
             })
             .catch(error => {
+                this.setState({loading: false});
                 console.log(error);
             });
     };
 
     setBrand = event => {
         this.setState({brandSearch: event.target.value});
-        this.searchforBrand();
     }
 
     render() {
@@ -36,7 +36,7 @@ class BrandInfo extends Component {
                     name="brand"
                     id="brand"
                     defaultValue={this.state.brandSearch}
-                    onChange={event => this.setBrand(event)}
+                    onChange={event => {console.log(event.target.value);this.setBrand(event)}}
                 >
                     <option value="MAN_SE">MAN</option>
                     <option value="Renault">RENAULT</option>
@@ -60,9 +60,12 @@ class BrandInfo extends Component {
                     this.state.loading ? <Spinner /> :
                     <React.Fragment>
                         <p>country: <strong>{this.state.country}</strong></p><br/>
-                        <img src={this.state.imagePath} height = "200px" width="350px" alt="brandLogo"/>
+                        <img src={this.state.imagePath} height = "100px" width="200px" alt="brandLogo"/>
                     </React.Fragment>
                 }
+                <div style = {{margin: '30px auto'}}>
+                    <button style = {{ width: '100px', borderRadius: '20px', backgroundColor: "rgb(61, 83, 83)", color: 'white'}} onClick = {this.searchforBrand}>Go!</button>
+                </div>
             </div>
         );
     }
