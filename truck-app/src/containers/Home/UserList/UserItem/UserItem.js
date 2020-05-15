@@ -90,7 +90,7 @@ class UserItem extends Component {
                         <button
                             style={{
                                 width: "60%",
-                                borderRadius: "20px",
+                                borderRadius: "10px",
                                 backgroundColor: "rgb(61, 83, 83)",
                                 color: "white",
                             }}

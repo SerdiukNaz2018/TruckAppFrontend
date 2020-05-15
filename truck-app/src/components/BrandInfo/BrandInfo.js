@@ -45,22 +45,23 @@ class BrandInfo extends Component {
                         console.log(event.target.value);
                         this.setBrand(event);
                     }}
-                >
-                    <option value="MAN_SE">MAN</option>
-                    <option value="Renault">RENAULT</option>
-                    <option value="Tata_Group">TATA</option>
-                    <option value="DAF_Trucks">DAF</option>
-                    <option value="Iveco">IVECO</option>
+                >   
+                    <option value="bmw">BMW</option>
                     <option value="Mercedes-Benz">Mercedes-Benz</option>
+                    <option value="Audi">Audi</option>
+                    <option value="Toyota">Toyota</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Lexus">Lexus</option>
+                    <option value="Mazda">Mazda</option>
+                    <option value="Subaru">Subaru</option>
+                    <option value="Kia_Motors">KIA</option>
+                    <option value="MAN_SE">MAN</option>
+                    <option value="DAF_Trucks">DAF</option>
                     <option value="Volkswagen">Volkswagen</option>
                     <option value="Volvo">VOLVO</option>
-                    <option value="GAZ">GAZ</option>
                     <option value="Kamaz">KAMAZ</option>
                     <option value="UAZ">UAZ</option>
                     <option value="ZiL">ZIL</option>
-                    <option value="KrAZ">KRAZ</option>
-                    <option value="Minsk_Automobile_Plant">MAZ</option>
-                    <option value="ZAZ">ZAZ</option>
                 </select>
                 {this.state.loading ? (
                     <Spinner />
