@@ -11,6 +11,17 @@
     background-color: aliceblue;
 }
 
+.Truck .Icon {
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    border-radius: 0;
+}
+
+.Truck ul {
+    list-style-type: none;
+}
+
 .Truck img {
     width: 100%;
     height: 100%;

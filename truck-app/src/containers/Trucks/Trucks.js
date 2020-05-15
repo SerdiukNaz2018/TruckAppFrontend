@@ -224,7 +224,7 @@ class Trucks extends Component {
                     />
                     <input
                         type="search"
-                        placeholder="Search"
+                        placeholder="Search..."
                         onChange={this.setSearchRequest}
                     />
                     <button onClick={this.searchButtonHandler}>Search</button>

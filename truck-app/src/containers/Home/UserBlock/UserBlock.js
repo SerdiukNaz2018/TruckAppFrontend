@@ -9,8 +9,8 @@ const userBlock = props => {
     return (
         <div className={classes.UserBlock}>
             <Row>
-                <Col md={6} style={classes.imageHolder}>
-                    <img src={props.imagePath} alt="person" />
+                <Col md={6} style = {{overflow: 'hidden'}}>
+                    <img src={props.imagePath} alt="person"/>
                 </Col>
                 <Col md={6}>
                     <Row>
@@ -29,30 +29,29 @@ const userBlock = props => {
                         <ul>
                             <li>
                                 <p>
-                                    <strong>age: </strong>
-                                    {props.age}
+                                    <img className = {classes.Icon} src="https://image.flaticon.com/icons/svg/2720/2720599.svg" alt="age"/>
+                                    {props.age} years
                                 </p>
                             </li>
                             <li>
-                                <p>
-                                    <strong>sex: </strong> {props.sex}
-                                </p>
+                                <img className = {classes.Icon} src="https://image.flaticon.com/icons/svg/2847/2847940.svg" alt="sex"/>
+                                {props.sex}
                             </li>
                             <li>
                                 <p>
-                                    <strong>status: </strong>
+                                    <img className = {classes.Icon} src="https://image.flaticon.com/icons/svg/2705/2705056.svg" alt="status"/>
                                     {props.status}
                                 </p>
                             </li>
                             <li>
                                 <p>
-                                    <strong>e-mail: </strong>
+                                    <img className = {classes.Icon} src="https://image.flaticon.com/icons/svg/726/726623.svg" alt="email"/>
                                     {props.email}
                                 </p>
                             </li>
                             <li>
                                 <p>
-                                    <strong>country: </strong>
+                                    <img className = {classes.Icon} src="https://image.flaticon.com/icons/svg/854/854929.svg" alt="country"/>
                                     {props.country}
                                 </p>
                             </li>

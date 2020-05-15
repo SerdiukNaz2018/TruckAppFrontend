@@ -72,7 +72,7 @@ class UserItem extends Component {
         return (
             <div className={classes.UserItem}>
                 <Row>
-                    <Col md={6} style={{ textAlign: "center" }}>
+                    <Col md={6}>
                         <img
                             src={this.props.source}
                             width="100%"
@@ -89,7 +89,7 @@ class UserItem extends Component {
                         </ul>
                         <button
                             style={{
-                                width: "200px",
+                                width: "60%",
                                 borderRadius: "20px",
                                 backgroundColor: "rgb(61, 83, 83)",
                                 color: "white",

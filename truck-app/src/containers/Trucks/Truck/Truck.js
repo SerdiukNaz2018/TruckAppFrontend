@@ -48,7 +48,7 @@ class Truck extends Component {
                         </h1>
                         <ul>
                             <li>
-                                Price:{" "}
+                                <img className = {classes.Icon} src="https://image.flaticon.com/icons/svg/858/858151.svg" alt="price"/>
                                 <strong>
                                     {this.formatPriceString(this.state.price)}
                                 </strong>
@@ -62,16 +62,18 @@ class Truck extends Component {
                                 </select>
                             </li>
                             <li>
-                                License plate:{" "}
+                                <img className = {classes.Icon} src="https://image.flaticon.com/icons/svg/290/290081.svg" alt="plate"/>
                                 <strong>{this.props.licensePlate}</strong>
                             </li>
                             {!this.props.preview ? 
                             <React.Fragment>
                                 <li>
-                                    Country: <strong>{this.props.country}</strong>
+                                    <img className = {classes.Icon} src="https://image.flaticon.com/icons/png/512/446/446075.png" alt="country"/>
+                                    <strong>{this.props.country}</strong>
                                 </li>
                                 <li>
-                                    Year: <strong>{this.props.yearGraduation} </strong>
+                                    <img className = {classes.Icon} src="https://image.flaticon.com/icons/png/512/2/2192.png" alt="age"/>
+                                    <strong>{this.props.yearGraduation} </strong>
                                     {this.props.years !== 0 ? this.props.years === 1 ? <span>({this.props.years} year)</span> :<span>({this.props.years} years)</span> : <span>(new)</span>}
                                 </li> 
                             </React.Fragment>
