@@ -83,6 +83,9 @@ class SignUpForm extends Component {
         let valid = this.validate();
         if (valid) {
             console.log({
+                firstName: this.state.firstName,
+                lastName: this.state.secondName,
+                confirmPassword: this.state.passwordConf,
                 email: this.state.email,
                 password: this.state.password,
                 dateOfBirth: `${this.state.day}.${this.state.month}.${this.state.year}`,
@@ -91,9 +94,12 @@ class SignUpForm extends Component {
             });
             axios
                 .post("http://localhost:8088/api/user/create", {
+                    firstName: this.state.firstName,
+                    lastName: this.state.secondName,
+                    confirmPassword: this.state.passwordConf,
                     email: this.state.email,
                     password: this.state.password,
-                    dateOfBirth: `${this.state.day}.${this.state.month}.${this.state.year}`,
+                    dateOfBirth: `${this.state.month}.${this.state.day}.${this.state.year}`,
                     sex: this.state.sex,
                     imagePath: this.state.imagePath,
                 })
@@ -161,7 +167,7 @@ class SignUpForm extends Component {
 
                         <input
                             type="text"
-                            placeholder="second name"
+                            placeholder="last name"
                             onChange={event =>
                                 this.setValue(event.target.value, "secondName")
                             }
