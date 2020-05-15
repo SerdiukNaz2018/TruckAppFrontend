@@ -1,0 +1,26 @@
+.BrandInfo {
+    margin: auto;
+    position: absolute;
+    z-index: 500;
+    background-color: white;
+    width: 500px;
+    border: 1px solid #ccc;
+    box-shadow: 2px 3px 2px #ccc;
+    padding: 16px;
+    left: calc(50% - 250px);
+    top: 30%;
+    box-sizing: border-box;
+    transition: all 0.3s ease-out;
+    border-radius: 15px;
+    text-align: center;
+    z-index: 10;
+    padding: 30px;
+}
+
+.BrandInfo select {
+    border-radius: 10px;
+}
+
+.Brandinfo img {
+    border-radius: 20px;
+}
