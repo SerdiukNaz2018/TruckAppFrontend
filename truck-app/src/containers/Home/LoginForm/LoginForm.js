@@ -7,14 +7,20 @@ class LoginForm extends Component {
         email: "",
         password: "",
 
-        errorMessage: ""
+        errorMessage: "",
+        visiblePassword: false,
     };
+
+    passwordVisibilityToggle = () => {
+        this.setState({visiblePassword: !this.state.visiblePassword});
+    }
 
     shouldComponentUpdate(nextProps, nextState) {
         return (
             nextProps.visible !== this.props.visible ||
             nextState.status !== this.state.status ||
-            nextState.errorMessage !== this.state.errorMessage
+            nextState.errorMessage !== this.state.errorMessage ||
+            nextState.visiblePassword !== this.state.visiblePassword
         );
     }
 
@@ -27,14 +33,20 @@ class LoginForm extends Component {
     okButtonHandler = () => {
         console.log(this.state);
         axios
-            .post("http://localhost:8088/api/user/login", {email: this.state.email, password: this.state.password})
+            .post("http://localhost:8088/api/user/login", {
+                email: this.state.email,
+                password: this.state.password,
+            })
             .then(response => {
                 this.props.setUserInfo(response.data);
                 console.log(response.data);
             })
             .catch(error => {
                 console.log(error);
-                this.setState({errorMessage: 'This account is not accessible. Check you login/password or contact administrator to inform you whether you are active or banned'});
+                this.setState({
+                    errorMessage:
+                        "This account is not accessible. Check you login/password or contact administrator to inform you whether you are active or banned",
+                });
             });
     };
 
@@ -58,15 +70,19 @@ class LoginForm extends Component {
                     }
                 />
                 <input
-                    type="password"
+                    type={this.state.visiblePassword ? "text" : "password"}
                     placeholder="password"
                     onChange={event =>
                         this.setValue(event.target.value, "password")
                     }
                 />
-                {this.state.errorMessage ? 
-                    <div style = {{color: 'red'}}><p>{this.state.errorMessage}</p></div> : null
-                }
+                <p style = {{display: 'inline'}}><small>Show password</small></p>
+                <input style = {{display: 'inline', margin: '10px'}} type="checkbox" onChange={this.passwordVisibilityToggle} />
+                {this.state.errorMessage ? (
+                    <div style={{ color: "red" }}>
+                        <p>{this.state.errorMessage}</p>
+                    </div>
+                ) : null}
                 <button
                     style={{ width: "80px" }}
                     onClick={this.okButtonHandler}

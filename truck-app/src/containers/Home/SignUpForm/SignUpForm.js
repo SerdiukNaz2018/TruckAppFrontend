@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import classes from "../LoginForm/LoginForm.module.css";
 import axios from "axios";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 
 class SignUpForm extends Component {
@@ -23,6 +23,12 @@ class SignUpForm extends Component {
         firstNameError: "",
         secondNameError: "",
         authError: "",
+
+        visiblePassword: false,
+    };
+
+    passwordVisibilityToggle = () => {
+        this.setState({ visiblePassword: !this.state.visiblePassword });
     };
 
     validate = () => {
@@ -36,7 +42,7 @@ class SignUpForm extends Component {
         let check = true;
 
         if (
-            !/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+            !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
                 this.state.email
             )
         ) {
@@ -80,7 +86,8 @@ class SignUpForm extends Component {
             nextState.passwordError !== this.state.passwordError ||
             nextState.emailError !== this.state.emailError ||
             nextState.firstNameError !== this.state.secondNameError ||
-            nextState.authError !== this.state.authError
+            nextState.authError !== this.state.authError ||
+            nextState.visiblePassword !== this.state.visiblePassword
         );
     }
 
@@ -206,7 +213,11 @@ class SignUpForm extends Component {
                             </Col>
                             <Col md={6}>
                                 <input
-                                    type="password"
+                                    type={
+                                        this.state.visiblePassword
+                                            ? "text"
+                                            : "password"
+                                    }
                                     placeholder="password"
                                     onChange={event =>
                                         this.setValue(
@@ -217,7 +228,11 @@ class SignUpForm extends Component {
                                 />
 
                                 <input
-                                    type="password"
+                                    type={
+                                        this.state.visiblePassword
+                                            ? "text"
+                                            : "password"
+                                    }
                                     placeholder="confirm password"
                                     onChange={event =>
                                         this.setValue(
@@ -226,7 +241,6 @@ class SignUpForm extends Component {
                                         )
                                     }
                                 />
-
                                 <input
                                     type="imageAdress"
                                     placeholder="image adress"
@@ -239,7 +253,16 @@ class SignUpForm extends Component {
                                 />
                             </Col>
                         </Row>
+                        <p style={{ display: "inline" }}>
+                            <small>Show password</small>
+                        </p>
+                        <input
+                            style={{ display: "inline", margin: "10px" }}
+                            type="checkbox"
+                            onChange={this.passwordVisibilityToggle}
+                        />
                         <select
+                            style = {{display: 'block'}}
                             name="sex"
                             id="sex"
                             onChange={event =>
@@ -282,16 +305,12 @@ class SignUpForm extends Component {
                             </select>
                         </div>
 
-                        <div style={{ color: "red" }}>
-                            <small>{this.state.emailError}</small>
-                            <br />
-                            <small>{this.state.passwordError}</small>
-                            <br />
-                            <small>{this.state.firstNameError}</small>
-                            <br />
-                            <small>{this.state.secondNameError}</small>
-                            <br />
-                            <small>{this.state.authError}</small>
+                        <div style={{ height: 'min-content', color: "red" }}>
+                            <small style = {{display: 'block'}}>{this.state.emailError}</small>
+                            <small style = {{display: 'block'}}>{this.state.passwordError}</small>
+                            <small style = {{display: 'block'}}>{this.state.firstNameError}</small>
+                            <small style = {{display: 'block'}}>{this.state.secondNameError}</small>
+                            <small style = {{display: 'block'}}>{this.state.authError}</small>
                         </div>
                     </React.Fragment>
                 )}

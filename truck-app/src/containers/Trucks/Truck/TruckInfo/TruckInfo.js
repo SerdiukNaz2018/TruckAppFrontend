@@ -28,7 +28,6 @@ class TruckInfo extends Component {
         });
 
         let pricePattern = /^\+?(0|[1-9]\d*)$/;
-        let platePattern = /^[A-Za-z]{2}[0-9]{4}[A-Za-z]{2}$/;
         let yearPattern = /^(19[0-9][0-9]|20[0-1][0-9]|2020)$/;
         let modelPattern = /^[a-zA-Z 0-9]+$/;
         let check = true;
@@ -70,8 +69,8 @@ class TruckInfo extends Component {
     };
 
     updateTruck = () => {
-        const valid = this.validate()
-        if( valid ){
+        const valid = this.validate();
+        if (valid) {
             this.setState({ loading: true });
             axios
                 .put(
@@ -89,7 +88,6 @@ class TruckInfo extends Component {
                     console.log(error);
                 });
         }
-        
     };
 
     deleteTruck = () => {
@@ -136,7 +134,9 @@ class TruckInfo extends Component {
                                     type="text"
                                     defaultValue={this.props.model}
                                 />
-                                <div style = {{color: 'red'}}>{this.state.modelError}</div>
+                                <div style={{ color: "red" }}>
+                                    {this.state.modelError}
+                                </div>
                             </li>
                             <li>
                                 Price ($):{" "}
@@ -150,7 +150,9 @@ class TruckInfo extends Component {
                                     type="text"
                                     defaultValue={this.props.priceUSD}
                                 />
-                                <div style = {{color: 'red'}}>{this.state.priceError}</div>
+                                <div style={{ color: "red" }}>
+                                    {this.state.priceError}
+                                </div>
                             </li>
                             <li>
                                 Year:{" "}
@@ -165,7 +167,9 @@ class TruckInfo extends Component {
                                     defaultValue={this.props.year}
                                 />
                             </li>
-                            <div style = {{color: 'red'}}>{this.state.yearError}</div>
+                            <div style={{ color: "red" }}>
+                                {this.state.yearError}
+                            </div>
                         </ul>
                     ) : (
                         <Spinner />

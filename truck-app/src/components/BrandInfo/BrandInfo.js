@@ -7,10 +7,10 @@ import Spinner from "../UI/Spinner/Spinner";
 class BrandInfo extends Component {
     state = {
         loading: false,
-        brandSearch: "MAN_SE",
-        country: "Germany",
+        brandSearch: "Subaru",
+        country: "Japan",
         imagePath:
-            "https://upload.wikimedia.org/wikipedia/commons/5/54/Logo_MAN.png",
+            "http://upload.wikimedia.org/wikipedia/en/thumb/9/9f/Subaru_Corporation_logo.png/220px-Subaru_Corporation_logo.png",
     };
 
     searchforBrand = () => {
@@ -45,7 +45,7 @@ class BrandInfo extends Component {
                         console.log(event.target.value);
                         this.setBrand(event);
                     }}
-                >   
+                >
                     <option value="bmw">BMW</option>
                     <option value="Mercedes-Benz">Mercedes-Benz</option>
                     <option value="Audi">Audi</option>

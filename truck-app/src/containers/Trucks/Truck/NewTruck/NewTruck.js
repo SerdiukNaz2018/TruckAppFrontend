@@ -22,7 +22,12 @@ class TruckInfo extends Component {
     };
 
     validate = () => {
-        this.setState({priceError: "", plateError: "", modelError: "", yearError: ""});
+        this.setState({
+            priceError: "",
+            plateError: "",
+            modelError: "",
+            yearError: "",
+        });
 
         let pricePattern = /^\+?(0|[1-9]\d*)$/;
         let platePattern = /^[A-Za-z]{2}[0-9]{4}[A-Za-z]{2}$/;
@@ -41,12 +46,16 @@ class TruckInfo extends Component {
         }
 
         if (!platePattern.test(this.state.truckInformation.registrationPlate)) {
-            this.setState({ plateError: "*The form of license plate must be: 'DD1111DD'" });
+            this.setState({
+                plateError: "*The form of license plate must be: 'DD1111DD'",
+            });
             check = false;
         }
 
         if (!modelPattern.test(this.state.truckInformation.model)) {
-            this.setState({ modelError: "*Model should not contain any special caracters" });
+            this.setState({
+                modelError: "*Model should not contain any special caracters",
+            });
             check = false;
         }
 
@@ -69,7 +78,6 @@ class TruckInfo extends Component {
         if (valid) {
             this.setState({
                 loading: true,
-                
             });
             axios
                 .post(

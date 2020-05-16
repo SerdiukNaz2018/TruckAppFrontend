@@ -31,24 +31,37 @@ class Truck extends Component {
     };
 
     changeCurrency = event => {
-        this.setState({price: this.state.currencyList[event.target.value]});
+        this.setState({ price: this.state.currencyList[event.target.value] });
     };
 
     render() {
         return (
-            <div className={classes.Truck}
-            style={{width: this.props.preview ? 'fit-content' : '70%', display: this.props.preview ? 'inline' : 'block'}}>
+            <div
+                className={classes.Truck}
+                style={{
+                    width: this.props.preview ? "fit-content" : "70%",
+                    display: this.props.preview ? "inline" : "block",
+                }}
+            >
                 <Row>
-                    
-                    {!this.props.preview ? <Col md={6} style = {{overflow: 'hidden'}}> <img src={this.props.source} alt="truck" /> </Col> : null}
-                    
+                    {!this.props.preview ? (
+                        <Col md={6} style={{ overflow: "hidden" }}>
+                            {" "}
+                            <img src={this.props.source} alt="truck" />{" "}
+                        </Col>
+                    ) : null}
+
                     <Col md={!this.props.preview ? 6 : null}>
                         <h1>
                             {this.props.brand} {this.props.model}
                         </h1>
                         <ul>
                             <li>
-                                <img className = {classes.Icon} src="https://image.flaticon.com/icons/svg/858/858151.svg" alt="price"/>
+                                <img
+                                    className={classes.Icon}
+                                    src="https://image.flaticon.com/icons/svg/858/858151.svg"
+                                    alt="price"
+                                />
                                 <strong>
                                     {this.formatPriceString(this.state.price)}
                                 </strong>
@@ -62,22 +75,48 @@ class Truck extends Component {
                                 </select>
                             </li>
                             <li>
-                                <img className = {classes.Icon} src="https://image.flaticon.com/icons/svg/290/290081.svg" alt="plate"/>
+                                <img
+                                    className={classes.Icon}
+                                    src="https://image.flaticon.com/icons/svg/290/290081.svg"
+                                    alt="plate"
+                                />
                                 <strong>{this.props.licensePlate}</strong>
                             </li>
-                            {!this.props.preview ? 
-                            <React.Fragment>
-                                <li>
-                                    <img className = {classes.Icon} src="https://image.flaticon.com/icons/png/512/446/446075.png" alt="country"/>
-                                    <strong>{this.props.country}</strong>
-                                </li>
-                                <li>
-                                    <img className = {classes.Icon} src="https://image.flaticon.com/icons/png/512/2/2192.png" alt="age"/>
-                                    <strong>{this.props.yearGraduation} </strong>
-                                    {this.props.years !== 0 ? this.props.years === 1 ? <span>({this.props.years} year)</span> :<span>({this.props.years} years)</span> : <span>(new)</span>}
-                                </li> 
-                            </React.Fragment>
-                            : null}
+                            {!this.props.preview ? (
+                                <React.Fragment>
+                                    <li>
+                                        <img
+                                            className={classes.Icon}
+                                            src="https://image.flaticon.com/icons/png/512/446/446075.png"
+                                            alt="country"
+                                        />
+                                        <strong>{this.props.country}</strong>
+                                    </li>
+                                    <li>
+                                        <img
+                                            className={classes.Icon}
+                                            src="https://image.flaticon.com/icons/png/512/2/2192.png"
+                                            alt="age"
+                                        />
+                                        <strong>
+                                            {this.props.yearGraduation}{" "}
+                                        </strong>
+                                        {this.props.years !== 0 ? (
+                                            this.props.years === 1 ? (
+                                                <span>
+                                                    ({this.props.years} year)
+                                                </span>
+                                            ) : (
+                                                <span>
+                                                    ({this.props.years} years)
+                                                </span>
+                                            )
+                                        ) : (
+                                            <span>(new)</span>
+                                        )}
+                                    </li>
+                                </React.Fragment>
+                            ) : null}
                         </ul>
                         {this.props.admin ? (
                             <div
