@@ -12,8 +12,8 @@ class LoginForm extends Component {
     };
 
     passwordVisibilityToggle = () => {
-        this.setState({visiblePassword: !this.state.visiblePassword});
-    }
+        this.setState({ visiblePassword: !this.state.visiblePassword });
+    };
 
     shouldComponentUpdate(nextProps, nextState) {
         return (
@@ -76,8 +76,14 @@ class LoginForm extends Component {
                         this.setValue(event.target.value, "password")
                     }
                 />
-                <p style = {{display: 'inline'}}><small>Show password</small></p>
-                <input style = {{display: 'inline', margin: '10px'}} type="checkbox" onChange={this.passwordVisibilityToggle} />
+                <p style={{ display: "inline" }}>
+                    <small>Show password</small>
+                </p>
+                <input
+                    style={{ display: "inline", margin: "10px" }}
+                    type="checkbox"
+                    onChange={this.passwordVisibilityToggle}
+                />
                 {this.state.errorMessage ? (
                     <div style={{ color: "red" }}>
                         <p>{this.state.errorMessage}</p>

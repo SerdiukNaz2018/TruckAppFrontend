@@ -201,7 +201,7 @@ class SignUpForm extends Component {
                                     }
                                 />
                                 <input
-                                    type="email"
+                                    type="login"
                                     placeholder="e-mail"
                                     onChange={event =>
                                         this.setValue(
@@ -262,7 +262,7 @@ class SignUpForm extends Component {
                             onChange={this.passwordVisibilityToggle}
                         />
                         <select
-                            style = {{display: 'block'}}
+                            style={{ display: "block" }}
                             name="sex"
                             id="sex"
                             onChange={event =>
@@ -305,12 +305,22 @@ class SignUpForm extends Component {
                             </select>
                         </div>
 
-                        <div style={{ height: 'min-content', color: "red" }}>
-                            <small style = {{display: 'block'}}>{this.state.emailError}</small>
-                            <small style = {{display: 'block'}}>{this.state.passwordError}</small>
-                            <small style = {{display: 'block'}}>{this.state.firstNameError}</small>
-                            <small style = {{display: 'block'}}>{this.state.secondNameError}</small>
-                            <small style = {{display: 'block'}}>{this.state.authError}</small>
+                        <div style={{ height: "min-content", color: "red" }}>
+                            <small style={{ display: "block" }}>
+                                {this.state.emailError}
+                            </small>
+                            <small style={{ display: "block" }}>
+                                {this.state.passwordError}
+                            </small>
+                            <small style={{ display: "block" }}>
+                                {this.state.firstNameError}
+                            </small>
+                            <small style={{ display: "block" }}>
+                                {this.state.secondNameError}
+                            </small>
+                            <small style={{ display: "block" }}>
+                                {this.state.authError}
+                            </small>
                         </div>
                     </React.Fragment>
                 )}

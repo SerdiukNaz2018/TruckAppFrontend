@@ -5,10 +5,6 @@ import errorMessage from '../../errorMessage.jpg';
 
 const About = props => (
     <div className = {classes.About}>
-        <h3>Why</h3>
-        <p>The main idea was to apply our initial knowledge on WEB.</p>
-        <h3>Duration</h3>
-        <p>We have been working on the project for a week. The page was created on 15  May 2020.</p>
         <h3>Features</h3>
         <ul>
             <li><p><strong>HTML parser</strong><br/>We parsed the WIKI pages to find out the headquarter and logo of the current car like this:</p><BrandInfo /></li>
@@ -33,6 +29,7 @@ const About = props => (
         <ul>
             <li>Frontend: <strong>React.js</strong></li>
             <li>Backend: <strong>ASP.Net Core, Web API</strong></li>
+            <li>Database: <strong>SQL Server</strong></li>
         </ul>
         <h3>Github</h3>
         <ul>
