@@ -11,11 +11,15 @@
 }
 
 .UserItem img {
-    width: 200px;
-    height: 200px;
     border-radius: 20px;
 }
 
 .UserItem .Col {
     height: 100%;
+}
+
+@media( max-width: 1100px) {
+    .UserItem {
+        width: 80%;
+    }
 }
